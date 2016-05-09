@@ -69,18 +69,40 @@
 \begin_body
 
 \begin_layout Section
-Sistemas de Arquivo 
+Sistemas de Arquivo
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Um sistema de tempo real rígido normalmente é usado como um dispositivo
+ de controle em uma aplicação dedicada, possuindo restrições de tempo fixas
+ e bem deifinidas, essas restrições requerem que todos os atrasos do sistema
+ sejam evitados, incluindo a recuperação de dados armazenados, logo o amazenamen
+to secundário de qualquer tipo, normalmente, é limitado ou ausente, com
+ os dados sendo armazenados na memória de curta duração ou na memória de
+ somente leitura (ROM), esta está localizada em dispositivos de armazenamento
+ não voláteis, que retêm seu conteúdo mesmo no caso de falta de energia.
+ Como nenhum dos sistemas operacionais de uso geral existentes admite a
+ funcionalidade de tempo real rígido, não nos preocuparemos com este tipo
+ de sistema neste texto.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O tempo real flexível é um objetivo que pode ser alcançado, e que pode ser
+ combinado com outros tipos de sistemas, sendo úteis em diversar áreas incluindo
+ multimídia, realidade virtual e projetos científicos avançados.
+ Esses sistemas precisam de recursos avançados do sistema operacional, como
+ o sistema de arquivos, que não podem ser admitidos por sistemas de tempo
+ real rígido.
+ Devido aos usos expandidos para a funcionalidade de tempo real flexível,
+ ele está encontrando seu caminho nos sistemas operacionais mais atuais,
+ incluindo as principais distribuições baseadas no UNIX.
 \end_layout
 
 \begin_layout Subsubsection
@@ -88,14 +110,86 @@ Conceitos Básicos
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+O sistema de arquivos oferece o mecanismo para armazenamento e acesso ao
+ conteúdo do arquivo, incluindo dados e programas.
+ Este reside no armazenamento secundário, projetado para manter uma grande
+ quantidade de dados permanentemente
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+.
+ Os meios de armazenamento secundário mais comum são o disco rígido (HD)
+ e o solid-state drive (SSD).
+\end_layout
+
+\begin_layout Standard
+O sistema de arquivos propriamente dito costuma ser composto de muitos níveis
+ diferentes.
+ Cada nível no projeto utiliza recursos dos níveis mais baixos para criar
+ novos recursos para serem usados nos níveis mais altos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+.
+ Um exemplo de um projeto em camadas seria:
+\end_layout
+
+\begin_layout Itemize
+Programas de aplicação
+\end_layout
+
+\begin_layout Itemize
+Sistema de arquivos lógicos
+\end_layout
+
+\begin_layout Itemize
+Módulo de organização de arquivos
+\end_layout
+
+\begin_layout Itemize
+Sistema de arquivos básico
+\end_layout
+
+\begin_layout Itemize
+Controle de E/S
+\end_layout
+
+\begin_layout Itemize
+Dispositivos
+\end_layout
+
+\begin_layout Standard
+O sistema de arquivos básico só precisa emitir comandos genéricos para o
+ driver do dispositivo apropriado para poder ler e escrever blocos físicos
+ no disco.
+ Cada bloco possui um ou mais setores.
+ Dependendo da Unidade da unidade do disco, os setores variam de 32 bytes
+ a 4.096 bytes; em geral são de 512 bytes.
+\end_layout
+
+\begin_layout Standard
+O sistema de arquivo lógico gerencia as informações dos metadados, estes
+ incluiem toda a toda a estrutura do sistema de arquivos, excluindo os dados
+ reais.
+ O sistema de arquivos lógico gerencia a estrutura de diretórios para oferecer
+ ao módulo de organização de arquivo as informações de que precisa, dado
+ um nome de arquivo simbólico.
+ Ele contém a estrutura do arquivo por meio de blocos de controle de arquivo.
+ Um File Control Block - FBC contém informações sobre, incluindo propriedade,
+ permissões e local do conteúdo.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -103,14 +197,195 @@ Implementação de Sistemas de Arquivos
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Atualmente existem muitos sistemas de arquivos implementados.
+ Por exemplo, a maioria dos CD-ROMs é gravada no formato High Sierra, o
+ formato padrão combinado pelos fabricantes de CD-ROM.
+ Além dos sistemas de arquivos de mídia removível, cada sistema operacional
+ possui um (ou mais) sistema de arquivos baseado em disco.
+ O UNIX utiliza o UNIX File System - UFS como base.
+ o Windows aceita os formatos de sistema de arquivos de disco FAT, FAT32
+ e NTFS (ou Windows NT File System), além dos formatos de sistema de arquivos
+ de CD-ROM e DVD.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No disco, o sistema de arquivos pode conter informações sobre como dar boot
+ em um sistema operacional armazenado nele, a quantidade total de blocos,
+ a quantidade e o local dos blocos livres, a estrutura de diretórios e arquivos
+ individuais
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+.
+ As estruturas no disco incluem:
+\end_layout
+
+\begin_layout Itemize
+Um boot control block pode conter informações necessárias para o sistema
+ carregar um sistema operacional a partir dessa partição.
+ Se o disco não tiver um sistema operacional, esse bloco poderá está vazio.
+ Esse costuma ser o primeiro bloco de uma partição.
+ No UFS, ele é chamado de boot block; no NTFS, ele é o partition boot sector.
+\end_layout
+
+\begin_layout Itemize
+Um partition control block contém os detalhes da partição, como a quantidade
+ de blocos, o tamanho dos blocos e o contador de FBCs.
+ No UFS, esse bloco é chamado superbloco; no NTFS, ele é o Master File Table
+ (MFT).
+\end_layout
+
+\begin_layout Itemize
+Uma estrutura de diretórios é usada para organizar os arquivos.
+\end_layout
+
+\begin_layout Itemize
+Um FBC contém muito dos detalhes do arquivo, incluindo permissões de arquivo,
+ propriedade, tamanho e local dos blocos de dados.
+ No UFS, ele é chamado de inode.
+ No NTFS, essa informação fica armazenada dentro do MFT, que usa uma estrutura
+ de banco de dados relacional, com uma linha por arquivo.
+\end_layout
+
+\begin_layout Standard
+Informações podem ficar salvas na memória para melhoraria do desenpenho
+ via técnica de cache.
+ As estruturas podem incluir:
+\end_layout
+
+\begin_layout Itemize
+Uma tabela de partição na memória, contendo informações sobre cada partição
+ montada.
+\end_layout
+
+\begin_layout Itemize
+Uma estrutura de diretórios na memória, que mantém as informações dos diretórios
+ acessados recentemente.
+\end_layout
+
+\begin_layout Itemize
+A tabela de arquivos abertos em todo o sistema contém uma cópia do FBC de
+ cada arquivo aberto, bem como outras informações.
+\end_layout
+
+\begin_layout Itemize
+A tabela de arquivos abertos por processo contém um ponteiro para a entrada
+ apropriada na tabela de arquivos abertos em todo o sistema, além de outras
+ informações.
+\end_layout
+
+\begin_layout Standard
+Para criar um arquivo, um programa de aplicação chama o sistema de arquivos
+ lógico.
+ Este conhece o formato das estruturas de diretórios.
+ Para criar um novo arquivo, ele aloca um novo FBC, lê o diretório apropriado
+ para memória, atualiza-o com o novo nome de arquivo e FBC, e escreve-o
+ de volta no disco.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+ Um FBC contém:
+\end_layout
+
+\begin_layout Itemize
+Permissões do arquivo.
+\end_layout
+
+\begin_layout Itemize
+Datas do arquivo (criação, acesso, escrita).
+\end_layout
+
+\begin_layout Itemize
+Proprietário do arquivo e grupo.
+\end_layout
+
+\begin_layout Itemize
+Tamaho do arquivo.
+\end_layout
+
+\begin_layout Itemize
+Blocos de dados do arquivo.
+\end_layout
+
+\begin_layout Standard
+Para que um arquivo possa ser aberto é preciso uma chama 
+\begin_inset Quotes eld
+\end_inset
+
+open
+\begin_inset Quotes erd
+\end_inset
+
+, esta passa um nome de arquivo ao sistema de arquivos.
+ Quando um arquivo é aberto, a estrutura do diretório é pesquisada em busca
+ de determinado nome de arquivo.
+ As partes da estrutura de diretório são colocadas em cache na memória,
+ para agilizar as operações de diretório.
+ Quando o arquivo é localizado, o FBC é copiado para uma tabela de arquivos
+ em todo o sistema, na memória.
+ Essa tabela armazena o FBC e entradas para um contador da quantidade de
+ processos que abriram o arquivo.
+ Em seguida, é feita uma entrada na tabela de arquivos abertos por processo.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quando um processo fecha o arquivo, a entrada na tabela por processo é removida,
+ e o contador de abertura na entrada de tabela do sistema é decrementado.
+ Quando todos os usuários que abriram o arquivo o tiverem fechado, a informação
+ de arquivo atualizada é copiada para a estrutura de diretório baseada em
+ disco e a entrada na tabela de arquivos abertos em todo o sistema é removida.
+\end_layout
+
+\begin_layout Standard
+O problema principal é como alocar espaço para esses arquivos de modo que
+ o espaço no disco seja utilizado de forma eficaz e os arquivos possam ser
+ acessados com rapidez.
+ Três métodos principais de alocação do espaço em disco estão em uso comum:
+ alocação contigua, interligada e indexada.
+ Em geral um sistema usará um método em particular para todos os arquivos.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Silberschatz2004"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+O método de alocação contigua requer que cada arquivo ocupe um conjunto
+ de blocos contiguos no disco.
+ os endereços no disco definem uma ordenação linear no disco.
+\end_layout
+
+\begin_layout Itemize
+Com a alocação interligada, cada arquivo é uma lista interligada de discos;
+ blocos podem estar espalhados em qualquer lugar no disco.
+\end_layout
+
+\begin_layout Itemize
+A alocação indexada guarda todos os ponteiros em um único lugar: o bloco
+ de índice.
 \end_layout
 
 \begin_layout Subsubsection
@@ -118,14 +393,104 @@ Algoritmos de Escalonamento de Disco
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Primeiramente considere o tempo que o disco leva para ler ou escrever um
+ bloco.
+ O tempo necessário é determinado por três fatores.
+ São eles:
+\end_layout
+
+\begin_layout Itemize
+Tempo de posicionamento (o tempo necessário para mover o braço para o cilindro
+ correto).
+\end_layout
+
+\begin_layout Itemize
+Tempo de rotação (o tempo necessário para rotar o setor correto sob cabeçote
+ de leitura/gravação).
+\end_layout
+
+\begin_layout Itemize
+Tempo de transferência real do dado.
+\end_layout
+
+\begin_layout Standard
+Se o driver de disco recebe uma requisição após a outra e atende a todas
+ na ordem em que elas foram recebidas, isto é, 'primeiro a chegar, primeiro
+ a ser servido' (first-come, first-served - FCFS), quase nada pode ser feito
+ para otimizar o tempo de posicionamento.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TanenbaumMachadoFilho1995"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Podemos melhorar o desempenho além do obtido no algoritmo FCFS.
+ Enquanto um posicionamento para um cilindro está sendo feito, novas requisições
+ chegam para outros cilindros.
+ Elas são colocadas na tabela de requisições pendentes, com uma lista encadeada
+ para cada cilindro.
+ 
+\end_layout
+
+\begin_layout Standard
+Quando a requisição atual é finalizada o algoritmo FCFS recupera a próxima
+ da fila, posicionando o braço no cilindro requisitado, porém, ele poderia
+ tratar a próxima requisição como sendo aquela mais próxima da posição atual
+ do cabeçote, a fim de minimizar o tempo de posicionamento.
+ Este algoritmo, posicionamento mais curto primeiro (shortest seek first
+ - SSF), reduz pela metade a movimentação do braço se comparado com o FCFS.
+\end_layout
+
+\begin_layout Standard
+Infelismente, o SSF apresenta um problema.
+ Com o disco totalmente carregado, o braço tenderá a permanecer no meio
+ do disco na maior parte do tempo, de modo que as requisições para os cilindros
+ extremos terão de esperar.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TanenbaumMachadoFilho1995"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O algoritmo do elevador reconcilia os objetivos conflitantes de eficiência
+ e justiça.
+ Este move o braço em uma mesma direção até não haver mais requisições pendentes
+ naquela direção, quando, então, troca de direção.
+ Este algoritmo precisa que o software mantenha um bit de direção atual
+ (sobe ou desce).
+ Quando a requisição é concluída o driver verifica o bit.
+ Se ele contém SOBE, o braço se move para a próxima requisição pendente
+ imediatamente acima.
+ Se nenhuma requisão está pendente nas posições superiores, o bit de direção
+ é invertido.
+ Quando o bit contém DESCE, o movimento é feito para a próxima solicitação
+ imediatamente abaixo.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TanenbaumMachadoFilho1995"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibliografia"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
