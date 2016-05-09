@@ -82,62 +82,607 @@
 Deadlock 
 \end_layout
 
+\begin_layout Subsection
+Conceito de Recursos e Deadlock
+\end_layout
+
+\begin_layout Subsubsection
+Recursos
+\end_layout
+
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Um recurso pode pode ser um dispositivo de hardware ou trecho de informação.
+ Um computador em geral tem uma variedade muito grande de recurso.
+ Para alguns recursos, várias instâncias podem estar disponíveis.
+ Quando várias cópias de um recurso se encontram disponíveis se encontram
+ disponíveis, qualquer uma delas pode ser usada para satisfazer uma requisição,
+ em suma, um recurso é algo que pode ser adquirido, usado e liberado com
+ o tempo.
+\end_layout
+
+\begin_layout Standard
+Existem dois tipos de recursos:
+\end_layout
+
+\begin_layout Itemize
+Preemptivel: Recurso que pode ser retirado do processo sem nenhum prejuízo
+ 
+\end_layout
+
+\begin_layout Itemize
+Não Preemptivel: É o que não pode ser retirado do atual processo, sem ocorra
+ nenhuma falha.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Deadlock
+\end_layout
+
+\begin_layout Standard
+Formalmente definido como um conjunto de processos do Sistema Operacional,
+ onde todo processo pertencente ao conjunto estiver esperando por um evento
+ que somente outro processo desse mesmo conjunto poderá fazer acontecer.
+\end_layout
+
+\begin_layout Standard
+A definição textual de deadlock por ser muito abstrata.
+ No entanto, algumas observações são pertinentes: 
+\end_layout
+
+\begin_layout Itemize
+O deadlock pode ocorrer mesmo que haja somente um processo no SO, considerando
+ que este processo utilize múltiplos threads e que tais threads requisitem
+ os recursos alocados a outros threads no mesmo processo;
+\end_layout
+
+\begin_layout Itemize
+O deadlock independe da quantidade de recursos disponíveis no sistema; 
+\end_layout
+
+\begin_layout Itemize
+Normalmente o deadlock ocorre com recursos, tais como dispositivos, arquivos,
+ memória etc.
+ Apesar de a CPU também ser um recurso para o SO, em geral é um recurso
+ facilmente preemptível, pois existem os escalonadores para compartilhar
+ o processador entre os diversos processos, quando trata-se de um ambiente
+ multitarefa
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/Tonny/Documents/grafo.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exemplo de representação de deadlock em grafos de alocação de recursos,
+ com dois processos A e B, e dois recursos R1 e R2.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
-Conceito de Recursos e Deadlock 
+Condições para a Ocorrência de Deadlock
 \end_layout
 
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+\begin_layout Itemize
+Exclusão Mútua: todo recurso está ou associado a um único processo ou disponível
+;
+\end_layout
+
+\begin_layout Itemize
+Posse e Espera: processos que retêm recursos podem solicitar novos recursos;
+ 
+\end_layout
+
+\begin_layout Itemize
+Não Preempção: recursos concedidos previamente não podem ser forçosamente
+ tomados; 
+\end_layout
+
+\begin_layout Itemize
+Espera Circular: deve haver uma cadeia circular de dois ou mais processos,
+ na qual cada um está à espera de recursos retido pelo membro seguinte dessa
+ cadeia.
+ Todas essas condições devem ocorrer simultaneamente para que ocorra Deadlock.
+ Se uma dessas condições não ocorrer, não haverá deadlock.
+ Espera circular: Deve exisitir um encadeamento circular de dois ou mais
+ processos.
+ Cada um deles encontra-se a espera de um recurso que está sendo usado pelo
+ membro seguinte dessa cadeia.
+ 
 \end_layout
 
 \begin_layout Subsection
-Condições para a Ocorrência de Deadlock 
+As formas de Tratamento de Deadlocks
 \end_layout
 
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+\begin_layout Itemize
+Ignorar o problema por completo: Se você ignorar o problema, talvez ele
+ te ignore :) 
 \end_layout
 
-\begin_layout Subsection
-As formas de Tratamento de Deadlocks 
+\begin_deeper
+\begin_layout Itemize
+O algoritmo do avestruz é uma estratégia de ignorar problemas potenciais
+ com base no fato de que eles podem ser extremamente raros — "enfie a cabeça
+ na areia e finja que não há nenhum problema".
+ Isso pressupõe é mais rentável permitir que o problema ocorra do que tentar
+ a sua prevenção.
+ 
 \end_layout
 
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+\end_deeper
+\begin_layout Itemize
+Detecção e recuperação: Deixar que aconteçam os deadlocks, detecta-los e
+ agir 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Detecção de deadlock com um recurso de cada tipo 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nessa estratégia de detecção e recuperação, o sistema permite que ocorra
+ o deadlock e só então executa o procedimento de recuperação, que resume-se
+ na detecção da ocorrência e na recuperação posterior do sistema.
+ É na execução desse procedimento que ocorre a sobrecarga, pois existem
+ dois grandes problemas: primeiramente, como/quando detectar o deadlock
+ e depois, como corrigi-lo.
+\end_layout
+
+\begin_layout Itemize
+Para detectar o deadlock, o sistema deve implementar uma estrutura de dados
+ que armazene as informações sobre os processos e os recursos alocados a
+ eles.
+ Essas estruturas deverão ser atualizadas dinamicamente, de modo que reflitam
+ realmente a situação de cada processo/recurso no sistema.
+ 
+\end_layout
+
+\begin_layout Itemize
+Só o mero procedimento de atualização dessas estruturas já gera uma sobrecarga
+ no sistema, pois toda vez que um processo aloca, libera ou requisita um
+ recurso, as estruturas precisam ser atualizadas.
+ 
+\end_layout
+
+\begin_layout Itemize
+Além disso, o SO precisa verificar a ocorrência da condição de espera circular
+ nessas estruturas para a efetiva detecção do deadlock.
+ Esse procedimento, por sua vez, gera outra sobrecarga, que pode ser mais
+ intensa se não for definido um evento em particular para ser executado,
+ como a liberação de um recurso, por exemplo.
+ Assim, ou o SO verifica periodicamente as estruturas (o que não é aconselhável,
+ pois pode aumentar consideravelmente o tempo de espera dos processos não-bloque
+ados), ou pode-se implementar uma política, onde o SO verifica as estruturas
+ quando o mesmo realizar algum procedimento de manutenção do sistema, por
+ exemplo.
+ Finalmente, só após detectar a presença do deadlock no sistema, o SO precisa
+ corrigi-lo, executando um procedimento de recuperação.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/Tonny/Documents/ciclo.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Detecção de um deadlock
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Detecção de deadlock com vários recursos de cada tipo
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Baseia-se em um ambiente que possua vários recursos do mesmo tipo e os processos
+ solicitam apenas pelo tipo de recursos, não especificando qual recurso
+ desejam utilizar.
+ 
+\end_layout
+
+\begin_layout Itemize
+O algoritmo para essa detecção trabalha com duas variáveis, três matrizes
+ unidimensionais (vetores) e duas matrizes bidimensionais, descritas a seguir:
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Estruturas: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+n: Variável inteira.
+ Representa a Quantidade de Processos Ativos; 
+\end_layout
+
+\begin_layout Itemize
+m: Variável inteira.
+ Representa a Quantidade de Tipos de Recursos; 
+\end_layout
+
+\begin_layout Itemize
+Matriz E = : Matriz unidimensional, de tamanho m.
+ Representa a Matriz de Recursos Existentes; 
+\end_layout
+
+\begin_layout Itemize
+Matriz A = : Matriz unidimensional, de tamanho m.
+ Representa a Matriz de Recursos Atualmente Disponíveis; 
+\end_layout
+
+\begin_layout Itemize
+Matriz W = : Matriz unidimensional, de tamanho m.
+ Representa uma Matriz Auxiliar, presente somente para facilitar o cálculo
+ durante a execução do algoritmo; 
+\end_layout
+
+\begin_layout Itemize
+Matriz C = : Matriz bidimensional, de tamanho n x m.
+ Representa a Matriz de Alocação Corrente; 
+\end_layout
+
+\begin_layout Itemize
+Matriz R = : Matriz bidimensional, de tamanho n x m.
+ Representa a Matriz de Recursos Requisitados.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Faça (para preenchimento das estruturas): 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Preencher a Matriz E com as quantidade de instâncias de cada tipo de recurso;
+ 
+\end_layout
+
+\begin_layout Itemize
+Preencher a Matriz C com as quantidade de instâncias de cada tipo alocadas
+ aos processos, sendo que o somatório de cada coluna da Matriz C deve ser
+ menor ou igual à quantidade do recurso correspondente na Matriz E (os processos
+ nunca podem requisitar mais recursos que existentes no sistema); 
+\end_layout
+
+\begin_layout Itemize
+Preencher a Matriz W com o resultado da subtração da quantidade de cada
+ recurso da Matriz E com o valor do somatório de cada coluna do recurso
+ correspondente da Matriz C, ou seja:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $wj=ej-\sum cij$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Preencher inicialmente a Matriz A com os valores da Matriz W.
+ 
+\end_layout
+
+\begin_layout Itemize
+Note que: 
+\begin_inset Formula $aj=ej+wj$
+\end_inset
+
+ ; 
+\end_layout
+
+\begin_layout Itemize
+Preencher a Matriz R com as próximas requisições dos processos, seguindo
+ as mesmas regras da Matriz C.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Faça (para detecção do deadlock): 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Inicialmente, desmarcar todos os processos; 
+\end_layout
+
+\begin_layout Itemize
+Para um processo Pi desmarcado, verificar se todos os elementos da linha
+ i na Matriz R são menores ou iguais aos da Matriz A; 
+\end_layout
+
+\begin_layout Itemize
+Se for, então marque o execute o processo Pi e libere os recursos requisitados
+ pelo processo na Matriz C (adicionar a linha i da Matriz C na Matriz A);
+ 
+\end_layout
+
+\begin_layout Itemize
+Retornar ao passo 2.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+A lógica do algoritmo é a seguinte: cada processo é considerado como apto
+ a ser executado até que a detecção prove o contrário.
+ A detecção apenas verifica se os processos requisitam mais recursos do
+ que estão disponíveis, o que caracteriza um deadlock.
+ Caso o processo requisite uma quantidade disponível, então ele pode ser
+ executado, e os recursos que foram solicitados antes podem também ser liberados
+ de volta ao sistema, o que pode permitir que outros processos também concluam
+ suas execuções e liberem os recursos.
+ 
+\end_layout
+
+\begin_layout Itemize
+Um exemplo do preenchimento das matrizes encontra-se na figura abaixo, considera
+ndo-se n=2 e m=3.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/Tonny/Documents/matriz.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exemplo do preenchimento das matrizes do algoritmo de detecção de deadlock
+ com vários recursos de cada tipo.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Métodos de Recuperação
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Preempção
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Retira o recurso de algum outro processo, entrega a outro processo, depois
+ devolve ao processo que cedeu o recurso, sem que o mesmo perceba
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Depende da natureza do recurso 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Reversão de Estado 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Armazena periodicamente o estado do processo (checkpointing)
+\end_layout
+
+\begin_layout Itemize
+Reinicia um processo do estado salvo (chekpoint) em caso de deadlock
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Tudo que foi depois do chekpoint é perdido e precisa ser refeito 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Eliminação de processos
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Escolhe um processo para ser eliminado, quebrando o ciclo
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+O processo escolhido deve deter recursos que estão causando o deadlock
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Preferencialmente se escolhe um processo que possa ser reiniciado sem grandes
+ consequências 
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Anulação dinâmica por meio de uma alocação cuidadosa de recursos 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Trajetória de Recursos 
+\end_layout
+
+\begin_layout Itemize
+Estados Seguros e Inseguros 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Um estado é seguro se não está em deadlock e existe uma ordem de escalonamento
+ na qual todos os processos possam ser executados até sua conclusão.
+ O sistema pode garantir que todos os processos terminarão estado inseguro:
+ pode até ser que todos os processos terminem mas esta garantia não pode
+ ser dada
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Algoritmo do Banqueiro 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+O Algoritmo do banqueiro é um algoritmo de alocação de recursos com prevenção
+ de impasses desenvolvido por Edsger Dijkstra que testa a segurança pela
+ simulação da alocação do máximo pré-determinado possível de montantes de
+ todos os recursos computacionais, e em seguida faz uma verificação de estados-s
+eguros para testar a possibilidade de condições de impasse para todas as
+ outras atividades pendentes, antes de decidir se a alocação deve prosseguir.
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/Tonny/Documents/banqueiro.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algoritmo do Banqueiro
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Prevenção, negando estruturalmente uma das quatro condições condições necessária
+s para o acontecimento de um deadlock.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Atacando a condição de exclusão mutua: Se nunca acontecer de um recurso
+ ser alocado exclusivamente a um único processo, nunca haverá deadlock.
+\end_layout
+
+\begin_layout Itemize
+Atacando a condição de posse e espera: Se puder impedir que processos que
+ já mantêm posse de recursos, esperem por mais recursos, será garantido
+ que não haverá deadlock.
+ Uma forma de se atingir esse objetivo é exigir que todos os processos requisist
+em todos os seus recursos, antes de inicializarem suas respectivas execuções.
+\end_layout
+
+\begin_layout Itemize
+Atacando a condição de não preempção: Se um processo estiver de posse de
+ um recurso, o mesmo será bloqueado até que seja finalizado, podendo assim,
+ ser alocado por um outro processo.
+\end_layout
+
+\begin_layout Itemize
+Atacando a condição de espera circular: Um meio simples de eliminar é ter
+ uma regra que garanta que um processo tenha permissão para possuir somente
+ um recurso de cada vez.
+ Se for necessário um outro recurso, deverá liberar o recurso que esteja
+ utilizando para a solicitação de um novo.
+ 
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Gerência de Memória 
 \end_layout
