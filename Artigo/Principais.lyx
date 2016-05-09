@@ -72,12 +72,12 @@
 Principais Sistemas Operacionais de Tempo Real
 \end_layout
 
-\begin_layout Standard
-1.1- QNX
+\begin_layout Subsection
+QNX
 \end_layout
 
-\begin_layout Standard
-1.1.1-Introdução
+\begin_layout Subsubsection
+Introdução
 \end_layout
 
 \begin_layout Standard
@@ -102,8 +102,8 @@ A mais de 30 anos, o QNX se destaca pela sua robustez, confiabilidade e
  A versão mais recente do QNX é o 6.4.1 que foi lançada em 2009.
 \end_layout
 
-\begin_layout Standard
-1.1.2-Características
+\begin_layout Subsubsection
+Características
 \end_layout
 
 \begin_layout Standard
@@ -270,8 +270,8 @@ No escalonamento adaptativo, caso o timeslice do processo termine então
  
 \end_layout
 
-\begin_layout Standard
-1.1.3-Conclusão
+\begin_layout Subsubsection
+Conclusão
 \end_layout
 
 \begin_layout Standard
@@ -303,12 +303,12 @@ Em 2010, a Research In Motion (RIM), fabricante do BlackBerry, adquiriu
  QNX até hoje dá um respaldo maior à comunidade QNX no mundo.
 \end_layout
 
-\begin_layout Standard
-1.2- AIX
+\begin_layout Subsection
+AIX
 \end_layout
 
-\begin_layout Standard
-1.2.1-Introdução
+\begin_layout Subsubsection
+Introdução
 \end_layout
 
 \begin_layout Standard
@@ -322,8 +322,8 @@ O sistema operacional AIX é um sistema operacional UNIX aberto baseado em
  qualquer sistema operacional UNIX.
 \end_layout
 
-\begin_layout Standard
-1.2.2-Características
+\begin_layout Subsubsection
+Características
 \end_layout
 
 \begin_layout Standard
@@ -367,8 +367,8 @@ Os comandos smit e smitty referem-se ao mesmo programa, embora smitty apresente
  Para se verificar se o X Window está residente utilize o comando DISPLAY.
 \end_layout
 
-\begin_layout Standard
-1.2.3-Aplicações
+\begin_layout Subsubsection
+Aplicações
 \end_layout
 
 \begin_layout Standard
@@ -381,12 +381,12 @@ O AIX é desenvolvido para computadores com arquitetura PowerPC, sendo limitado
  
 \end_layout
 
-\begin_layout Standard
-1.3- FreeRTOS 
+\begin_layout Subsection
+FreeRTOS 
 \end_layout
 
-\begin_layout Standard
-1.3.1-Introdução
+\begin_layout Subsubsection
+Introdução
 \end_layout
 
 \begin_layout Standard
@@ -400,8 +400,8 @@ O FreeRTOS é um Sistema Operacional de Tempo Real(RTOS) bastante popular,
  
 \end_layout
 
-\begin_layout Standard
-1.3.2-Características 
+\begin_layout Subsubsection
+Características 
 \end_layout
 
 \begin_layout Standard
@@ -454,8 +454,8 @@ O FreeRTOS também implementa multithreads fazendo chamadas de processos
  necessário podem fazer as devidas interrupções.
 \end_layout
 
-\begin_layout Standard
-1.3.3-Conclusão
+\begin_layout Subsubsection
+Conclusão
 \end_layout
 
 \begin_layout Standard
@@ -468,25 +468,551 @@ dade com a maioria das arquiteturas usadas e também possui um alto poder
  
 \end_layout
 
-\begin_layout Standard
-1.4- Outros exemplos
+\begin_layout Subsection
+VxWorks
+\end_layout
+
+\begin_layout Subsubsection
+Introdução
 \end_layout
 
 \begin_layout Standard
-Existe uma quantidade muito grande de sistemas operacionais de tempo real
- que são implementados para uma demanda mais generalista ou para demandas
- mais específicas, como por exemplo o SafeRTOS que é um RTOS baseado no
- FreeRTOS só que com um foco em segurança de tempo real, outro RTOS baseado
- no FreeRTOS é o OpenRTOS que basicamente é uma cópia sem as exigências
- do GPL e também o BRTOS que é um RTOS considerado básico.
+VxWorks é um sistema operacional de tempo real similar ao Unix produzido
+ e vendido pela Wind River Systems de Alameda, Califórnia, EUA.
 \end_layout
 
 \begin_layout Standard
-Outro RTOS líder de mercado é o VxWorks, que foi criado pela empresa WindRiver,
- também especializado em sistemas embarcados estabelecendo uma estratégia
- de interconexão chamada de conexão alvo-hospedeiro, que ajuda no gerenciamento
- de uma ou mais aplicações embarcadas.
+Foi criado no começo dos anos 80, quando os fundadores da Wind River resolveram
+ usar seus conhecimentos adquiridos em sistemas de tempo real.
+ Eles tomaram algumas decisões fundamentais sobre como um sistema de tempo
+ real embarcado deveria ser e assim criaram o produto, que desde então já
+ teve 6 versões principais.
+\end_layout
+
+\begin_layout Standard
+Assim como outros sistemas operacionais de tempo-real, o VxWorks contém
+ um kernel multitarefa com escalonamento preemptivo, rápida resposta às
+ interrupções, meios de comunicação entre processos e meios para sincronização,
+ e sistemas de arquivos.
+\end_layout
+
+\begin_layout Standard
+As características do VxWorks são o gerenciamento de memória compatível
+ com POSIX, facilidades para multiprocessadores, um shell para interface
+ de usuário, depurador com capacidade simbólica/código fonte, e monitor
+ de performance.
+ VxWorks geralmente é empregado em sistemas embarcados.
+ Diferentemente dos sistemas Unix tradicionais, o desenvolvimento no VxWorks
+ é feito numa máquina hospedeira rodando Unix ou Windows, compilando cruzado
+ (cross-compiling) o software para máquina alvo.
+ A tarefa de execução é feita no alvo, mas pode ser feita no hospedeiro,
+ através de um simulador de alvo (VxSim).
  
+\end_layout
+
+\begin_layout Subsubsection
+Características
+\end_layout
+
+\begin_layout Standard
+Acredita-se que o nome VxWorks venha do sistema operacional VRTX, criado
+ pela Ready Systems (hoje produto da Mentor Graphics).
+ Nos anos 1980, o VRTX era um novo produto e não funcionava como sistema
+ operacional.
+ A Wind River adquiriu então os direitos de revender o VRTX com uma extensão
+ chamada VxWorks que funcionava como sistema operacional (incluía um sistema
+ de arquivos e um ambiente de desenvolvimento).
+ Assim, é provável que VxWorks signifique VRTX now Works (VRTX agora funciona)
+ ou VRTX that works (VRTX que funciona).A filosofia da Wind River é de utilizar
+ dois sistemas operacionais complementares e cooperativos, deixando que
+ cada um faça o que tem de melhor.
+ De um lado está a máquina host, que roda um sistema operacional comum,
+ como por exemplo, o Windows, e é utilizada para desenvolvimento de aplicativos
+ apenas.
+ Do outro lado temos a máquina target que roda o VxWorks e lida com as tarefas
+ de tempo real.
+ Apenas um pequeno agente de debug esta residente na target, todo o resto
+ de desenvolvimento do software roda na host.
+ Desta maneira, a máquina host serve apenas como uma plataforma de desenvolvimen
+to de software.
+ É nela que deve ser rodado o TORNADO, que é o ambiente de desenvolvimento
+ da Wind River, e acompanha o VxWorks.
+ Mas é na máquina target que a aplicação em tempo real realmente funciona,
+ rodando totalmente em sistema operacional VxWorks.
+\end_layout
+
+\begin_layout Standard
+No coração do VxWorks roda um micro-kernel chamado de Wind.
+ Este micro-kernel suporta toda uma faixa de funções de tempo real incluindo
+ multitarefas, agendamento e comutação das tarefas, sincronização/comunicação
+ entre tarefas e manuseio de memória.
+ Todas as outras funcionalidades são implementadas como processos.
+\end_layout
+
+\begin_layout Standard
+O VxWorks é bem expansível.
+ Incluindo ou excluindo diversos módulos, ele pode ser configurado para
+ ser usado em pequenos sistemas embarcados, com pesadas restrições de memória,
+ até sistemas mais complexos, onde são necessárias mais funções.
+ Além disso, módulos individuais também são expansíveis.
+ Funções individuais podem ser removidas da biblioteca, ou objetos de sincroniza
+ção do kernel podem ser omitidos se não forem necessários para uma aplicação.
+\end_layout
+
+\begin_layout Standard
+O kernel de tempo real do VxWorks (wind) um ambiente básico de multitarefa.
+ Cada tarefa tem seu próprio contexto, que é o ambiente de CPU e os recursos
+ do sistema que ela vê quando é agendada pelo kernel para execução.
+ Em uma mudança de contexto, o contexto da tarefa é salvo em uma coisa chamada
+ Bloco de controle de tarefa (Task Control Block, TCB).
+\end_layout
+
+\begin_layout Standard
+O VxWorks oferece tanto um mecanismo de agendamento próprio (wind scheduling)
+ como um agendamento POSIX.
+\end_layout
+
+\begin_layout Standard
+Dois algoritmos de agendamento são disponibilizados:
+\end_layout
+
+\begin_layout Standard
+•Agendamento prioritário preemptivo: este é o algoritmo default no wind.
+ Ele garante que a CPU seja alocada para a thread com maior prioridade pronta
+ para rodar.
+ Quando uma thread com uma prioridade maior que a que esta rodando fica
+ pronta para rodar, o kernel imediatamente muda o contexto para a de maior
+ prioridade.
+\end_layout
+
+\begin_layout Standard
+•Agendamento Round-Robin: este algoritmo é uma extensão do agendamento prioritár
+io preemptivo.
+ Ele tenta compartilhar a CPU mais igualmente entre todas as threads de
+ prioridade igual.
+ Para isso ele designa uma fatia de tempo para as threads, e estas não podem
+ ser executadas por mais que este tempo determinado.
+ Quando o tempo acaba, o kernel muda o contexto para outras threads de mesma
+ prioridade, e essas são executadas pelo mesmo tempo designado.
+\end_layout
+
+\begin_layout Standard
+As diferenças entre o agendamento POSIX e o wind são as seguintes:
+\end_layout
+
+\begin_layout Standard
+•O agendamento POSIX é baseado em processos, e o wind em tarefas.
+\end_layout
+
+\begin_layout Standard
+•No POSIX, quanto maior o número, maior a prioridade, já no wind é o contrário,
+ quanto menor o número, maior a prioridade.
+ Para toda thread pode ser designado um nível de prioridade de 0 a 255 (256
+ níveis de prioridade).
+\end_layout
+
+\begin_layout Standard
+O VxWorks tem ainda um grande conjunto de funções relacionadas às tarefas.
+ Por exemplo, uma tarefa pode se proteger de ser deletada inesperadamente,
+ pode desativar o agendamento para que a mesma não seja preemptada (manuseio
+ de interrupções ainda irá funcionar), etc.
+\end_layout
+
+\begin_layout Standard
+No VxWorks todas as chamadas de sistema e tarefas compartilham o mesmo espaço
+ de memória.
+ Isso quer dizer que aplicações defeituosas podem acidentalmente acessar
+ recursos do sistema e comprometer a estabilidade de todo o sistema.
+\end_layout
+
+\begin_layout Standard
+Porém, a Wind River oferece um componente adicional (VxVMI), que deve ser
+ comprado a parte, e permite que cada processo tenha sua própria memória
+ virtual.
+\end_layout
+
+\begin_layout Standard
+O VxWorks (sem o VxVMI) tem algum suporte para proteção de memória.
+ Mas os detalhes de como esses mecanismos funcionam depende da plataforma
+ que esta sendo utilizada.
+ Para processadores x86, por exemplo, o usuário pode configurar endereços
+ de memória como válidos ou inválidos.
+ Se o processador tenta acessar um espaço inválido, ou áreas que não estão
+ mapeadas da memória, um erro é gerado.
+\end_layout
+
+\begin_layout Standard
+Quando tarefas compartilham o mesmo espaço, elas são na verdade threads.
+ Para ser qualificada como um processo, uma tarefa deve ter seu próprio
+ espaço na memória.
+ De acordo com as normas POSIX, um processo é um espaço de memória com ao
+ menos uma thread sendo executada e os recursos de sistema para aquela thread.
+\end_layout
+
+\begin_layout Subsubsection
+Conclusão
+\end_layout
+
+\begin_layout Standard
+A Wind River desenvolveu com o VxWorks um sistema altamente comercial e
+ um dos líderes de mercado nas aplicações de sistemas embarcados, grandes
+ projetos que necessitam de RTOS utilizam o VxWorks nas suas aplicações
+ são obviamente o Path Finder que levou um robô a Marte com o objetivo de
+ estudar o planeta, outro projeto interessante e bastante conhecido é o
+ do Boeing 707.
+ 
+\end_layout
+
+\begin_layout Standard
+O VxWorks possui nomes e estratégias diferentes de suas características,
+ mas no final das contas faz a mesma coisa que a maioria dos RTOS que concorrem
+ no mercado, execução rápida, alta compatibilidade de arquiteturas e boa
+ aplicabilidade em dispositivos embarcados.
+\end_layout
+
+\begin_layout Subsection
+eCos
+\end_layout
+
+\begin_layout Subsubsection
+Introdução
+\end_layout
+
+\begin_layout Standard
+O projeto do eCos, teve início pela Cygnus Solutions, fundindo depois com
+ a Red Hat e atualmente mantida pela eCosCentric .
+ Ele oferece algumas vantagens como flexibilidade em ajustá-los às exigências
+ da aplicação e aos recursos de hardware, isenção de taxa de licença do
+ software e ferramentas livres para desenvolvimento visando o baixo custo.
+\end_layout
+
+\begin_layout Standard
+O eCos oferece um excelente desempenho em tempo real, baixa latência, o
+ que ocupa poucos recursos do sistema e gera respostas mais rápidas, e ainda
+ comportamento determinístico de forma que os serviços agregados ao sistema
+ quando em operação são executados em um tempo previamente definido tornando-o
+ bastante viável.
+ Uma arquitetura em camadas oferece portabilidade e reutilização do código
+ fonte.
+ Bem similar ao linux, a distribuição de pacotes do kernel do eCos permite
+ total acesso ao seu código fonte que pode ser adicionado ao proposto sistema.
+\end_layout
+
+\begin_layout Standard
+A idéia principal da “Cygnus Solutions” era de oferecer alta qualidade e
+ desenvolvimento de software de código aberto.
+ Esse projeto foi desenvolvido por Michael Tiemann, David Henkel-Wallace,
+ e John Gilmore, colaboradores para o projeto GNU.
+\end_layout
+
+\begin_layout Subsubsection
+Características
+\end_layout
+
+\begin_layout Standard
+As discussões tiveram início por volta de 1997, com o objetivo de trazer
+ um baixo custo, com alta qualidade de produtos embarcados para o mercado.
+ O eCos foi proposto para complementar as ferramentas do GNUPro, oferecido
+ pelos produtos da Cygnus (Red Hat).
+\end_layout
+
+\begin_layout Standard
+O eCos é um sistema operacional em tempo-real especialmente desenvolvido
+ para sistemas embarcados.
+ Como o linux, o eCos tem licença GPL (General Public License) e seu foco
+ são aplicações para dispositivos eletrônicos de consumo, telecomunicações,
+ sistemas automotivos e sistemas em chip.
+ Ele é provido de um sistema em tempo real de código aberto apoiado pelo
+ projeto GNU, permitindo o acesso em todos os aspectos de sistema em tempo
+ real.
+ Seu código pode ser examinado, adicionado e modificado de acordo com as
+ necessidades do usuário.
+ Os direitos são concedidos e protegidos pela licença eCos, dando permissão
+ ao desenvolvimento e distribuição de aplicações.
+ Caso o usuário venha favorecer com alguma contribuição, ela pode ser analisada
+ e utilizada (para dispositivos de hardware e componentes) com a finalidade
+ de beneficiar a comunidade eCos.
+\end_layout
+
+\begin_layout Standard
+Foi projetado para ser portável em vários tipos de arquiteturas e plataformas
+ como 16, 32 e 64 bits, MPUs (microprocessadores), MCUs (microcontroladores)
+ e DSPs (processadores digitais).
+ O kernel do eCos, bibliotecas e componentes em execução são organizados
+ na camada de abstração de hardware (HAL), ou seja, uma estrutura de software
+ para manipular a estrutura de hardware.
+ Esse conceito permite que o eCos seja executado em qualquer plataforma
+ como, ARM, CalmRISC, FR-V, H8, IA32, M68K, Matsushita AM3x, MIPS, NEC V8xx,
+ PowerPC, SPARC, SuperH.
+\end_layout
+
+\begin_layout Standard
+O eCos suporta aplicações com requisitos de tempo real, latência mínima
+ durante as interrupções, mecanismos de sincronização (semáforos, variáveis
+ condicionais, etc.), vários algoritmos de escalonamento incluindo escalonamento
+ em vários níveis e mecanismo de gerenciamento de interrupções.
+\end_layout
+
+\begin_layout Standard
+O eCos disponibiliza ainda suporte a dispositivos, relógio em tempo real,
+ gerenciamento de memória, gerenciamento de exceções, bibliotecas matemáticas
+ e as API’s POSIX e uITRON (Normalização das API’s pela IEEE).
+ O eCos pode ser programado na linguagem de programação C.
+ O tamanho do eCos é bem variado podendo ir de algumas centenas de kilobytes
+ até algumas dezenas de megabytes, isto graças ao fato do eCos ser extremamente
+ configurável, ou seja, é possível incluir, alterar ou retirar qualquer
+ item que corresponde as bibliotecas associadas a arquitetura que será portado
+ o kernel do eCos e escrever programas para ser executado em conjunto.
+ Assim, uma quantidade de código mínima pode ser gerada para rodar o sistema.
+\end_layout
+
+\begin_layout Standard
+Em relação à arquitetura do eCos, é importante analisar a estrutura de component
+es para projetos embarcados.
+ Ela foi projetada para minimizar a utilização de memória, permitindo que
+ os usuários controlem o sincronismo baseado em exigência de tempo real
+ e utilização de linguagens de programação C e C++.
+ Esta estrutura é especificamente destinada a sistemas embarcados e suas
+ exigências.
+ Uma quantidade enorme de funções para uma aplicação pode ser construída
+ a partir dos componentes de software reutilizáveis ou dos blocos de software
+ construídos.
+\end_layout
+
+\begin_layout Standard
+Os desenvolvedores podem selecionar os componentes que satisfazem as necessidade
+s básicas da aplicação e configurar reservadamente cada componente, selecionando
+ o item em particular.
+ Um exemplo disso está na programação de uma rotina de configuração, selecionand
+o um número de níveis de prioridade e satisfazendo o sincronismo das tarefas.
+\end_layout
+
+\begin_layout Standard
+A filosofia do eCos é otimizar a quantidade de funções dos componentes de
+ implementação de controle para as limitações do sistema, ou seja, adequar
+ o eCos para realizar funções no menor tempo ou no menor número de passos
+ possível.
+\end_layout
+
+\begin_layout Standard
+O eCos foi projetado para atender os seguintes itens fundamentais que acabam
+ forçando as companhias de dispositivos embarcados de produtos a desenvolver
+ suas próprias tecnologias em tempo real: 
+\end_layout
+
+\begin_layout Standard
+• Custo livre de royalty, porque não existe cobrança pelo seu uso e da licença
+ pública geral (GPL); 
+\end_layout
+
+\begin_layout Standard
+• Portabilidade, que oferece através das arquiteturas de chip de maneira
+ apropriado para o desenvolvimento de software de alto volume nas aplicações
+ em eletrônica de consumo, telecomunicações, automotivo e entre outras aplicaçõe
+s embarcadas; 
+\end_layout
+
+\begin_layout Standard
+• Código aberto, resultado de esforços de uma comunidade crescente de desenvolve
+dores na internet.
+ A configuração do eCos é possível a partir de alteração do código, como
+ as bibliotecas em arquivo texto, e através do ambiente gráfico de configuração.
+\end_layout
+
+\begin_layout Standard
+O eCos é baseado em uma arquitetura de software em camadas que abstrai os
+ detalhes da plataforma de hardware de alto nível de aplicação, oferecendo
+ uma excelente portabilidade, enquanto que, continua mantendo o desempenho
+ em baixo nível dos drivers e serviços.
+\end_layout
+
+\begin_layout Standard
+O aspecto principal do sistema eCos é que ele permite configuração do sistema.
+ Algumas ferramentas são fornecidas como depurador de código para gerenciar
+ alguma complexidade, permitindo que os componentes, que são os módulos
+ dos arquivos que compõem a estrutura para compor o kernel sejam alterados
+ como necessário (adição ou remoção).
+ A ferramenta gráfica (ConfigTool) oferece facilidade em construir o produto
+ final principal de uma configuração do eCos (kernel) e o resultado dessa
+ construção é ligado ao código da aplicação.
+\end_layout
+
+\begin_layout Standard
+A estrutura de componentes do eCos é um conjunto de ferramentas que permite
+ o usuário configurar o sistema com os pacotes necessários à aplicação específic
+a.
+ Na estrutura dos componentes estão inclusos: ferramenta de configuração
+ gráfica e por linha de comando, estrutura de disposição de memória e a
+ administração de pacotes.
+ Estas ferramentas são usadas para controlar e construir uma imagem de configura
+ção do eCos.
+ Uma configuração, mantém a escolha dos pacotes que foram selecionados sendo
+ gravado num arquivo com o nome seguido da extensão ’.ecc’.
+\end_layout
+
+\begin_layout Standard
+A terminologia do eCos compreende a estrutura dos componentes, a ferramenta
+ de configuração (ConfigTool), a estrutura de diretórios do repositório,
+ as opções de configuração, os componentes e os pacotes, as plataformas
+ destino e os templates (modelos de configuração parcial).
+ O repositório de componentes é uma estrutura de diretório do eCos que contém
+ todos os pacotes de instalação.
+ Ela inclui uma ferramenta de administração para adicionar novos pacotes,
+ atualizar e remover os pacotes velhos dentro do repositório.
+ O diretório principal, eCos, possui os arquivos de distribuição do eCos.
+ Já o subdiretório que contém o repositório componente são os pacotes (packages).
+ Um arquivo de banco de dados, “ecos.db” (situado no diretório dos pacotes),
+ é mantida pela ferramenta da administração do pacote e contém os detalhes
+ sobre os vários pacotes no repositório componente.
+\end_layout
+
+\begin_layout Standard
+Esse arquivo de banco de dados deve ser, ocasionalmente editado para o caso
+ de existir uma camada HAL para uma plataforma de hardware própria, deve-se
+ assim editar o banco de dados (ecos.db) para que o novo HAL seja reconhecido
+ e controlado pela ferramenta de configuração.
+ Uma parte dos pacotes do kernel do eCos é vista na Figura 2.4 através da
+ ferramenta de configuração.A utilização da Linguagem de Definição de Componentes
+ (CDL) é resultado da hierarquia de configuração dos pacotes dos componentes
+ para as opções de configurações e sub-opções.
+ Os blocos gerados são agrupados aos itens subordinados.
+\end_layout
+
+\begin_layout Standard
+O componente é uma opção de configuração que encapsula opções mais detalhadas.
+ Eles podem ser habilitados e desabilitados, dependendo de sua necessidade
+ em particular.
+ Na estrutura dos componentes, pode se ver uma checkbox para habilitar ou
+ desativar o componente.
+ A principal vantagem é a otimização do tempo e da imagem do eCos a ser
+ gerada.
+\end_layout
+
+\begin_layout Standard
+A opção de configuração é fundamental para configurabilidade do eCos.
+ Na verdade, a configuração é feita para a geração de um único eCos e suas
+ opções podem ser alteradas.
+\end_layout
+
+\begin_layout Standard
+Outra forma de otimização é em relação aos componentes de hardware.
+ Por exemplo, no caso de não ser usado uma porta Ethernet para uma aplicação
+ haverá uma economia de memória para o sistema.
+\end_layout
+
+\begin_layout Standard
+Já um pacote (package) é um tipo de componente pronto para a distribuição.
+ Nele existem todos os arquivos necessários de código fonte, arquivo de
+ cabeçalho, arquivo de descrição de configuração, documentação e outros
+ relevantes.
+ Um pacote possui geralmente um arquivo simples podendo ser instalado pela
+ ferramenta apropriada ou alterado no futuro quando forem feitas mudanças,
+ existindo ainda formas de controlar as versões dos arquivos.
+\end_layout
+
+\begin_layout Standard
+O kernel é o elemento principal de todo o eCos, fundamental para qualquer
+ sistema operacional e também chamado de núcleo.
+ Ele oferece a funcionalidade necessária ao núcleo para desenvolvimento
+ de aplicações multi-threads ou escalonamento de processos, como relacionado
+ a seguir:
+\end_layout
+
+\begin_layout Standard
+a) Habilidade em criar novos processos no sistema, tanto durante o início
+ como no momento de execução; 
+\end_layout
+
+\begin_layout Standard
+b) Controlar os diversos processos, como suas prioridades de tarefas; 
+\end_layout
+
+\begin_layout Standard
+c) Escolha de programação, determinando qual o processo estaria em execução
+ no momento; 
+\end_layout
+
+\begin_layout Standard
+d) Uma escala de primitivas de sincronização, permitindo os processos interagir
+ e compartilhar os dados com segurança; 
+\end_layout
+
+\begin_layout Standard
+e) Integração com suporte do sistema para interrupções e exceções.
+\end_layout
+
+\begin_layout Standard
+Em alguns sistemas operacionais o kernel permite recursos adicionais, como
+ por exemplo, alocação de memória e fazer com que os drivers dos dispositivos
+ façam parte do núcleo, mas o eCos não faz isso.
+ Ele controla a alocação de memória através de um módulo separado, assim
+ como os drivers dos dispositivos.
+\end_layout
+
+\begin_layout Standard
+Os módulos do kernel do eCos são opcionais para seu funcionamento, sendo
+ possível escrever aplicações de processos simples como o RedBoot(ambiente
+ de verificação e inicialização de sistemas embarcados).
+ Tipicamente algumas aplicações são baseadas em torno de uma rotina central
+ de decisão, checando continuamente todos os dispositivos e gerando as ações
+ apropriadas às ocorrências de entrada/saída.
+\end_layout
+
+\begin_layout Standard
+A funcionalidade do kernel do eCos pode ser usada de duas maneiras diferentes,
+ oferecendo sua própria API em C, funções como “cyg_thread_create” e “cyg_mutex_
+lock”.
+ Eles podem ser chamados diretamente através do código da aplicação ou por
+ outros pacotes.
+ Também existem diversos pacotes ou módulos que oferece compatibilidade
+ com as API’s existentes como os processos:
+\end_layout
+
+\begin_layout Standard
+• POSIX : nome coletivo de padrões de uma família de padrões da IEEE para
+ definir uma interface de programação de aplicativos de software compatíveis
+ com variáveis do sistema operacional Unix.
+ 
+\end_layout
+
+\begin_layout Standard
+• μITRON: projeto que tem como objetivo a padronização do RTOS e relacionar
+ as especificações para sistemas embarcados em VLSI.
+\end_layout
+
+\begin_layout Standard
+Os sistemas operacionais normalmente utilizam uma camada de abstração de
+ hardware (HAL, do inglês Hardware Abstraction Layer).
+ Essa camada é responsável por transformar as instruções especificas de
+ um dispositivo em instruções genéricas.
+ O HAL é essencialmente importante para sistemas embarcados, pois os mesmos
+ são executados em uma variedade muito grande de hardware.
+ Por exemplo, os processadores ARM, muito utilizados na produção de sistemas
+ embarcados, possuem diversas famílias que apesar de serem semelhantes cada
+ qual tem características particulares.
+\end_layout
+
+\begin_layout Standard
+A camada de abstração de hardware encapsula características específicas
+ de cada arquitetura suportada pelo kernel, para que ele e outros componentes
+ possam ser implementados em sistemas embarcados.
+\end_layout
+
+\begin_layout Subsubsection
+Conclusão
+\end_layout
+
+\begin_layout Standard
+Podemos concluir que o eCos é um projeto bastante tanto a nível comercial
+ quanto a nível acadêmico, e por ser de código aberto e mantido pela comunidade
+ open-source se mantém bastante atualizado e mesmo assim poderoso.
+\end_layout
+
+\begin_layout Standard
+Assim como outros RTOS, o eCos possui uma alta compatibilidade com diferentes
+ arquiteturas e uma rápida velocidade de execução, possui distribuições
+ tanto para Linux quanto para Windows, e por ser quase todo desenvolvido
+ em C++, alta legibilidade, redigibilidade e escalabilidade.
 \end_layout
 
 \end_body
