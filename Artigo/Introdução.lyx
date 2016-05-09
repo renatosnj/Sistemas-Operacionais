@@ -70,18 +70,27 @@
 \begin_body
 
 \begin_layout Section
-Introdução (deve abordar) 
+Introdução 
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+O conceito de tempo real em processamento de dados está relacionado a atender
+ às necessidades e restrições de tempo impostas pelo processo controlado.
+ Aplicando este conceito em sistemas operacionais, significa que em um RTOS
+ é preciso haver um controle do tempo para que as restrições possam ser
+ atendidas.
+ Em outras palavras, é preciso haver um comportamento determinístico, o
+ que significa que cada serviço do sistema operacional tomará um tempo conhecido
+ e esperado.
+ Esse determinismo é a principal diferença de um RTOS em relação a um sistema
+ operacional convencional.
+ Em geral, um sistema operacional (SO) é responsável por gerenciar os recursos
+ de hardware e hospedar os aplicativos que são executados no computador.
+ Um sistema operacional de tempo real (RTOS) também executa essas tarefas,
+ mas é projetado especialmente para rodar aplicações com extrema precisão
+ e alto grau de confiabilidade.
+ Isso pode ser especialmente importante para sistemas de medição e controle.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -89,14 +98,35 @@ Histórico e Conceitos Básicos
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Os sistemas operacionais de tempo real foram projetados para trabalhar com
+ resposta a eventos e com sistemas de controle em malha fechada.
+ Um exemplo de aplicação com resposta a eventos, na qual é imprescindível
+ a utilização de RTOS é um sistema de airbag automotivo, este sistema necessita
+ de precisão e confiabilidade, pois a resposta a um estímulo deve ser feita
+ em um determinado espaço de tempo.
+ Já um exemplo de aplicação de controle em malha fechada em que o RTOS é
+ necessário, é para o controle de velocidade em automóveis, pois também
+ é necessário precisão e confiabilidade.
+ Ambos os sistemas exigem a realização de uma operação dentro de um tempo
+ determinado.
+ Esse tipo de desempenho é chamado de determinístico.
+ Esse determinismo vem à tona em diversas partes do sistema operacional
+ como o escalonamento de tarefas, alocação dinâmica de memória e troca de
+ mensagens entre as tarefas.
+ Sistemas operacionais comuns não possuem um comportamento de tempo determinísti
+co nessas áreas e portanto não atendem ao critério de tempo real.
+ Sistemas de tempo real podem ser classificados como “soft” ou “hard”.
+ Para sistemas de tempo real do tipo soft, a utilidade de um sistema geralmente
+ é inversamente proporcional ao tempo de resposta, após um determinado prazo
+ ter sido perdido.
+ Por exemplo, quando pressionamos um botão do telefone para atender uma
+ chamada, a conexão deve ser estabelecida logo após o botão ter sido apertado,
+ contudo, o prazo não é tão crítico e pequenos atrasos podem ser tolerados.
+ Sistemas de tempo real do tipo “hard” são aqueles em que a utilidade do
+ sistema torna-se zero em caso de perda do prazo.
+ O principal componente de um sistema operacional é seu núcleo (kernel)
+ que compõe uma camada intermediária entre o hardware e a aplicação (programa
+ do usuário).
 \end_layout
 
 \begin_layout Subsection
@@ -104,14 +134,49 @@ Principais distribuições
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+O principal serviço oferecido pelo núcleo do sistema operacional é o gerenciamen
+to das tarefas (task management).
+ Uma tarefa é uma seqüência de instruções, ou pedaço de programa, responsável
+ por uma determinada ação; por exemplo, a leitura de um teclado ou sensor.
+ Cada tarefa pode ter uma necessidade e restrição de tempo diferente, por
+ isso a necessidade de um RTOS.
+ Mas não apenas isto, uma tarefa pode ser mais importante, ou mais urgente,
+ que outra.
+ Ou seja, cada tarefa tem sua prioridade.
+\end_layout
+
+\begin_layout Standard
+Um RTOS pode gerenciar a comutação entre as tarefas através de dois modos
+ de escalonamento: preemptivo e cooperativo.
+ No modo preemptivo uma tarefa pode ser interrompida pelo sistema operacional
+ para que outra passe a ser executada.
+ No modo cooperativo é o programador quem define em cada tarefa o momento
+ em que ela vai abandonar o controle do processador liberando-o para a execução
+ de uma outra tarefa.
+\end_layout
+
+\begin_layout Standard
+O gerenciamento da comunicação entre tarefas, feito através de sinalizadores
+ e de troca de mensagens é outro serviço oferecido pelo núcleo dos sistema
+ operacional.
+\end_layout
+
+\begin_layout Standard
+Para atender às restrições de tempo, um RTOS também oferece serviços de
+ temporização, como o controle do “estouro de tempo”(time-out).
+ A base de tempo estabelecida pelo sistema recebe o nome de “tick rate”.
+\end_layout
+
+\begin_layout Standard
+Outros serviços que podem estar presentes em alguns sistemas operacionais
+ de tempo real são o supervisionamento de dispositivos de entradas e saídas;
+ serviços de alocação dinâmica de memória que permitem às tarefas utilizar
+ alguns pedaços da memória de dados para o programa e; serviços adicionais
+ de alto-nível como gerenciamento de sistema de arquivos, banco de dados
+ e interface gráfica de usuário.
+ Exemplos Telecomunicações Estabelecimento de conexões, videoconferência
+ Aeroespacial Automação em aeronaves, sondas espaciais Defesa Radar Entretenimen
+to Vídeo games, vídeo sob demanda 
 \end_layout
 
 \begin_layout Subsection
@@ -119,29 +184,135 @@ Classificação (monolítico, micronúcleo ou híbrido)
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsection
-Objetivos do trabalho 
+Classificação dos sistemas operacionais em: monolitico, micronucleo, hibrido.
+ Sistemas monolíticos: Neste tipo de estrutura, o SO é escrito como uma
+ coleção de rotinas, onde cada rotina pode chamar qualquer outra rotina,
+ sempre que for necessário.
+ Portanto, o sistema é estruturado de forma que as rotinas podem interagir
+ livremente umas com as outras.
+ Quando esta técnica é usada, cada rotina no sistema possui uma interface
+ bem definida em termos de parâmetros e resultados.
+ Os serviços do SO (gerenciamento de processos, gerenciamento de memória,
+ gerenciamento do sistema de arquivos, ...) são implementados por meio de System
+ Calls em diversos módulos, executando em Modo Núcleo.
+ Como todos os módulos (rotinas) executam no mesmo espaço de endereçamento,
+ um bug em um dos módulos pode derrubar o sistema inteiro.
+ Evidentemente que esta é uma situação indesejável.
+ Tal código executa em Modo Núcleo.
+ Não existe ocultação de informação, o que também é indesejável, pois cada
+ rotina é visível a qualquer outra.
+ Vantagem : dessa arquitetura é seu desempenho: qualquer componente do núcleo
+ pode acessar os demais componentes, toda a memória ou mesmo dispositivos
+ periféricos diretamente, pois não há barreiras impedindo esse acesso.
+ A interação direta entre componentes também leva a sistemas mais compactos.
+ Desvantagens: O mal funcionamento de uma aplicação do kernel pode se alastrar
+ e levar o sistema ao colapso (travamento ou instabilidade) Manutenção mais
+ complexa.
+ Evolução mais complexa.
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto 
+sistemas micro-nucleo Por fazer os núcleos de sistema ficarem menores, essa
+ abordagem foi denominada micro-núcleo (ou µ-kernel).
+ Um micro-núcleo normalmente implementa somente a noção de atividade, de
+ espaços de memória protegidos e de comunicação entre atividades.
+ Todos os aspectos de alto nível, como políticas de uso do processador e
+ da memória, o sistema de arquivos e o controle de acesso aos recursos são
+ implementados fora do núcleo, em processos que se comunicam usando as primitiva
+s do núcleo.
+ Exemplo : usando essa abordagem o código de acesso aos blocos de um disco
+ rígido seria mantido no núcleo, enquanto as abstrações de arquivo e diretório
+ seriam criadas e mantidas por um código fora do núcleo, executando da mesma
+ forma que uma aplicação do usuário.
+ Em um sistema micro-núcleo, as interações entre componentes e aplicações
+ são feitas através de trocas de mensagens.
+ Assim, se uma aplicação deseja abrir um arquivo no disco rígido, envia
+ uma mensagem para o gerente de arquivos, que por sua vez se comunica com
+ o gerente de dispositivos para obter os blocos de dados relativos ao arquivo
+ desejado.
+ Todas as mensagens são transmitidas através de serviços do micro-núcleo.
+ Como os processos têm de solicitar “serviços” uns dos outros (para poder
+ realizar suas incumbências), essa abordagem também foi denominada cliente-servi
+dor.
+ Vantagens: 
+\end_layout
+
+\begin_layout Standard
+Robustez e flexibilidade.
+ Caso um sub-sistema tenha problemas, os mecanismos de proteção de memória
+ e níveis de privilégio irão confiná-lo, impedindo que a instabilidade se
+ alastre ao restante do sistema.
+ Além disso, é possível customizar o sistema operacional, iniciando somente
+ os componentes necessários ou escolhendo os componentes mais adequados
+ às aplicações que serão executadas.
+ Desvantagens:
+\end_layout
+
+\begin_layout Standard
+o custo associado às trocas de mensagens entre componentes pode ser bastante
+ elevado, o que prejudica seu desempenho e diminui a aceitação desta abordagem.
+ Sistemas Hibridos O objetivo principal da utilização de sistemas híbridos
+ é a construção de um sistema que englobe as características fundamentais
+ de cada abordagem que o compõe, de forma a criar um novo sistema que responderá
+ melhor ao problema do que quando se utiliza isoladamente cada componente
+ do sistema híbrido.
+ Desta forma a combinação de técnicas pode levar a uma técnica mais robusta
+ e eficiente (Braga, 2007).
+ O sistema é visto como uma forma de resolver problemas onde as técnicas
+ tradicionais não obtêm pleno êxito.
+ De acordo com (ref) três importantes razões para a criação de sistemas
+ híbridos são: i) melhoria de técnicas individuais; ii) o sistema híbrido
+ é criado porque nenhuma técnica isoladamente é aplicável aos muitos sub-problem
+as que uma aplicação pode atacar e iii) realização de múltiplas tarefas
+ em uma única arquitetura, ou seja, o sistema pode ser mais informativo
+ que o seria originalmente, sem hibridização.
+ As principais abordagens utilizadas são baseadas de no emprego de técnicas
+ baseadas em dados, como redes neurais, aliadas a alguma outra técnica,
+ ou mesmo uma combinação de diferentes tipos de redes neurais.
+ As área empregadas na construção de sistemas híbridos são a Estatística,
+ Sistemas Fuzzy, Computação Evolucionária, Lógica Matemática, Linguagens
+ Formais, Linguagem Natural e IA Simbólica (Braga, 2007).
+ Cada técnica emprega pode contribuir isoladamente para o sistema como um
+ todo.
+ A IA Simbólica, baseada em regras, é uma maneira formal de representar
+ conhecimento; os Sistemas Fuzzy, bastante difundidos, permitem raciocínio
+ em termos lingüísticos, a representação de conhecimento do senso comum;
+ A computação evolucionária é de fácil hibridização com outras técnicas,
+ tendo sido inclusive utilizada no projeto de redes neurais, o que pode
+ ser considerado uma forma de sistema híbrido.
+ 
+\end_layout
+
+\begin_layout Subsection
+Objetivos do trabalho
+\end_layout
+
+\begin_layout Standard
+1.4.1.
+ Objetivo Geral busca apresentar e mostrar características dos sistemas
+ operacionais em tempo real bem como sua funcionalidade, particularidades,
+ vantagens e desvantagens.
+\end_layout
+
+\begin_layout Standard
+1.4.2.
+ Objetivos Específicos
+\end_layout
+
+\begin_layout Standard
+Incentivar o estudo da área de Sistemas operacionais em tempo real;
+\end_layout
+
+\begin_layout Standard
+Gerar uma curiosidade na busca de novos sistemas operacionais;
+\end_layout
+
+\begin_layout Standard
+Incentivar o advento de novos estudantes para a área;
+\end_layout
+
+\begin_layout Standard
+Ampliar o conhecimento dos estudantes sobre a área 
 \end_layout
 
 \begin_layout Subsection
@@ -149,14 +320,38 @@ Tópicos do trabalho
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Capítulo 1: Introdução – Neste capítulo, é descrito o histórico e os conceitos
+ básicos presentes nos sistemas operacionais em tempo real, principais distribui
+ções, classificações e objetivo geral e especificos.
+ 
+\end_layout
+
+\begin_layout Standard
+Capítulo 2: Processos e threads – Nesse capitulo irá ser abordado o funcionament
+o dos processos e threads seus estados e transições, escalonamento e tipos
+ e alguns algoritmos de escalonamento.
+ 
+\end_layout
+
+\begin_layout Standard
+Capítulo 3: Deadlock– Já neste capítulo, são descritos conceitos de recursos
+ e deadlock, condições para sua ocorrência e formas de tratamento.
+ 
+\end_layout
+
+\begin_layout Standard
+Capítulo 4: Gerência de Memória– Será abordado necessidades básicas, funcionamen
+to, particionamento de memória, memória virtual e técnicas.
+\end_layout
+
+\begin_layout Standard
+Capítulo 5:Sistema de arquivo – Será abordado conceitos básicos, implementação
+ e algoritmo de escalonamento.
+\end_layout
+
+\begin_layout Standard
+Capítulo 6: Conclusão- Neste último, uma abordagem geral do trabalho é apresenta
+da.
 \end_layout
 
 \end_body
