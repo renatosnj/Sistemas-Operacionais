@@ -70,27 +70,423 @@
 
 \begin_layout Section
 Principais Sistemas Operacionais de Tempo Real
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Não tem tópicos, acho que seria cada SO os tóricos
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+1.1- QNX
+\end_layout
+
+\begin_layout Standard
+1.1.1-Introdução
+\end_layout
+
+\begin_layout Standard
+O QNX é um Sistema Operacional de tempo real que foi desenvolvido em 1982
+ que é baseado em UNIX foi criado pela empresa QNX Software Systems para
+ ser utilizado principalmente em sistemas embarcado.
+ Recentemente, em 2010, a empresa Research In Motion que também é a criadora
+ do Blackberry.
+\end_layout
+
+\begin_layout Standard
+Como dito, o QNX foi desenvolvido especificamente para dispositivos embarcados
+ que necessitam de processamento em tempo real com interface gráfica, exemplos
+ comuns de aplicações do QNX são aparelhos em indústrias, sistemas de gerenciame
+nto de semáforos, sistemas operacionais de aparelhos médicos e entre outras
+ aplicações que se utilizam de processos críticos.
+\end_layout
+
+\begin_layout Standard
+A mais de 30 anos, o QNX se destaca pela sua robustez, confiabilidade e
+ estabilidade.
+ A versão mais recente do QNX é o 6.4.1 que foi lançada em 2009.
+\end_layout
+
+\begin_layout Standard
+1.1.2-Características
+\end_layout
+
+\begin_layout Standard
+O QNX é um RTOS comercial de código fechado que utiliza uma arquitetura
+ de microkernel, o QNX é considerado o principal RTOS no que diz respeito
+ a família de processadores x86.A arquitetura do kernel do QNX é constituída
+ de um escalonador de CPU, comunicação inter-processos, redirecionamento
+ de interrupções e temporizadores.
+ O Microkernel é preempitivo baseado em prioridades.
+ Todos os processos são executados em espaço de Usuário.Tem Suporte a clusters
+ de tolerância a falhas e é otimizado para sistemas distribuídos.
+\end_layout
+
+\begin_layout Standard
+O Kernel do QNX é de um tipo chamado microkernel, em que tem a idéia de
+ oferecer o mínimo de serviços necessários para que o sistema funcione.
+ Os outros serviços são providos através de outros processos opcionais.
+ No QNX o kernel chamado de "procnto".
+ A idéia não é simplesmente fazer um kernel pequeno, mas sim dar modularidade
+ a ele, o que consequentemente diminuirá o tamanho.
+\end_layout
+
+\begin_layout Standard
+Ele é utilizado para juntar os módulos do sistema operacional.
+ Muitos desenvolvedores acreditam que - devido à alta performance - ele
+ foi desenvolvido em Assembly, quando na verdade foi desenvolvido na linguagem
+ C.
+ O alta performance está relacionada às sucessivas redefinições de algoritmos
+ e estruturas de dados.
+ Desde sistemas embarcados com memória extremamente limitada à sistemas
+ com gigabytes de memória rodam o QNX.
+ A maioria dos serviços de tempo real e threads são implementados diretamente
+ no microkernel, o que dispensa módulos adicionais para o acesso a esses
+ serviços.
+ Além disso, vários outros serviços são suportados, como semáforos e mutexes.
+ Operações que exigem mais recursos, são carregadas em processos externos.
+ Esse modelo derruba o mito de que sistemas monolíticos possuem um tempo
+ de resposta mais rápido que sistemas que utilizam microkernel.
+\end_layout
+
+\begin_layout Standard
+O QNX, por se tratar de um sistema microkernel, implementa um sistema de
+ mensageria, o IPC, Comunicação entre Processos.
+ Estas mensagens são pacotes de bytes passados de um processo para o outro,
+ que permitem transmitir dados e meios de sincronização da execução de vários
+ processos.
+ O IPC supervisiona o roteamento de mensagens e também gerencia as mensagens
+ de proxies e sinais.
+ 
+\end_layout
+
+\begin_layout Standard
+• Mensagens: Fornece comunicação síncrona entre processos cooperativos,
+ onde o remetente exige uma prova de recebimento e uma confirmação para
+ mensagem.
+ 
+\end_layout
+
+\begin_layout Standard
+• Proxies: São especialmente adequados para notificação de eventos onde
+ o remetente não precisa interagir com destinatário
+\end_layout
+
+\begin_layout Standard
+• Sinais: Usados para suportar comunicação assíncrona entre processos.
+\end_layout
+
+\begin_layout Standard
+Como o IPC de mensagens espera uma confirmação de recebimento, no seu conteúdo
+ ela utiliza funções da linguagem C.
+ Quando é realizada a sincronização entre processos, são utilizadas as funções
+ SEND(), RECEIVE() e REPLY.
+ A partir do momento que uma mensagem de sincronização é disparada, o processo
+ remetente fica em estado de bloqueio, sendo liberado apenas ao receber
+ o retorno do processo destinatário.
+\end_layout
+
+\begin_layout Standard
+Uma forma de mensagem não bloqueante adequada especialmente para notificação
+ de eventos onde o realmente não precisa interagir com o destinatário, essa
+ é a única função de um proxy é enviar uma mensagem fixa a um processo especific
+o que possui o proxy, onde é possível enviar a mensagem para um processo,
+ sem que o remetente fique bloqueado ou esperando um retorno.
+\end_layout
+
+\begin_layout Standard
+As mensagens são métodos tradicionais de comunicação assíncrona.
+ Um sinal é considerado entregue a um processo quando a ação deferida por
+ ele é realizada pelo destinátario.
+ Um processo pode estabelecer um sinal sem nenhuma intervenção.
+ Nenhum dado é transmitido com sinal.
+ Entre o tempo que o sinal é gerado e o tempo que ele é entregue, ele é
+ considerado pendente.
+ Os sinais são entregues a um processo quando o processo esta pronto para
+ pronto para executar no escalonador.
+ Se o processo não tomar nenhuma ação especial para manipular sinais, ação
+ default é executada – finalizar o processo.Se o processo ignorar o sinal,
+ não ocorre nenhum efeito no processo quando ele é entregue.
+\end_layout
+
+\begin_layout Standard
+O QNX é um sistema operacional multithread.
+ No QNX o responsável por decidir qual thread deve estar sendo executada
+ em um dado instante é o kernel.
+ Ele também é o responsável por escalonar, efetuar as trocas de contexto
+ e salvar as informações da thread que esta saindo da CPU nos registradores
+ de controle.
+ Para garantir que duas threads não acessem simultaneamente um recurso compartil
+hado (seção critica), o QNX implementa a técnica de Exclusão Mutua Com sincroniz
+ação condicional (semáforos).
+\end_layout
+
+\begin_layout Standard
+As decisões de escalonamento são realizadas pelo micro-kernel nas seguintes
+ situações:
+\end_layout
+
+\begin_layout Standard
+• Quando o processo está bloqueado.
+\end_layout
+
+\begin_layout Standard
+• O timeslice de um processo em execução esgotou.
+\end_layout
+
+\begin_layout Standard
+• Processo em execução sofre preempção.
+ Todo processo criado no QNX recebe um prioridade, a qual o escalonador
+ utiliza para selecionar o próximo processo com maior prioridade que deve
+ estar em no estado ready (pronto), ou seja, podendo utilizar os recursos
+ da CPU.
+ Os métodos de escalonamento podem ser de três tipos: escalonamento FIFO,
+ escalonamento Round Robin, e escalonamento Adaptativo.
+ Cada processo no sistema operacional pode utilizar qualquer um desses métodos,
+ porém somente é aplicado os métodos em situações com dois ou mais processos
+ com mesma prioridade e com o estado ready, ou seja , pronto para utilizar
+ os recursos da CPU.
+ Caso um processo com maior prioridade torne-se ready , então causa a preempção
+ dos processos de baixa prioridade.
+\end_layout
+
+\begin_layout Standard
+No escalonamento FIFO a condição que o método seja executado é que o processo
+ renuncie o controle de forma voluntaria, não fazendo chamadas ao método
+ ou através de preempção por um processo com maior prioridade.
+\end_layout
+
+\begin_layout Standard
+No escalonamento Round-Robin, a condição para que o método continue executando
+ é o mesmo procedimento do escalonamento FIFO , porém acrescido de mais
+ um condição onde caso seja esgotado o timeslice do processo então há a
+ preempção e o próximo processo no estado Ready terá o controle.
+\end_layout
+
+\begin_layout Standard
+No escalonamento adaptativo, caso o timeslice do processo termine então
+ a prioridade do processo é reduzida em uma unidade, procedimento conhecido
+ como deterioração de prioridade.
+ Neste caso o processo não é bloqueado.
+ A prioridade do processo não cairá mais que uma unidade, mesmo que o timeslice
+ esgote novamente sem bloquear.
+ Caso o processo seja bloqueado então retorna para sua prioridade original.
+ O escalonamento adaptativo é o método default do criado pelo Shell.
+ 
+\end_layout
+
+\begin_layout Standard
+1.1.3-Conclusão
+\end_layout
+
+\begin_layout Standard
+Atualmente, a QNX Software Systems é líder mundial em tempo real, tecnologia
+ OS embarcada.
+ QNX é multiusuário, multitarefa, trabalha com rede e possui uma boa interface.
+ A semelhança visual do QNX com o Linux é explicada pelo fato de ambos os
+ projetos fazerem uso da interface gráfica PHOTON.
+ Versões mais recentes do QNX possuem diversas aplicações nativas, dentre
+ as quais se destaca o seu navegador de internet, o Voyager, que renderiza
+ praticamente todo tipo de conteúdo usado atualmente na web.
+\end_layout
+
+\begin_layout Standard
+Por se basear em UNIX, o QNX é confiável e estável, podendo ser ideal para
+ profissionais da área gráfica.
+ Líderes mundiais como a Cisco, General Eletric e Siemens dependem da tecnologia
+ QNX para roteadores de rede, instrumentos médicos, unidades telemáticas
+ de veículos, sistemas de segurança e de defesa, robótica industrial e outras
+ aplicações de missões críticas.
+\end_layout
+
+\begin_layout Standard
+Em 2010, a Research In Motion (RIM), fabricante do BlackBerry, adquiriu
+ o QNX e o implementou em seu primeiro tablet PC, o PlayBook, concorrente
+ direto do iPad, da Apple.
+ O fato de Gordon Bell e Dan Dodge, fundadores da QNX Software Systems,
+ ainda representarem um papel ativo no desenvolvimento e codificação do
+ QNX até hoje dá um respaldo maior à comunidade QNX no mundo.
+\end_layout
+
+\begin_layout Standard
+1.2- AIX
+\end_layout
+
+\begin_layout Standard
+1.2.1-Introdução
+\end_layout
+
+\begin_layout Standard
+O sistema operacional AIX é um sistema operacional UNIX aberto baseado em
+ padrões que permite executar as aplicações que desejar, no hardware que
+ quiser, em servidores baseados no IBM UNIX OS.
+ Cada vez mais os negócios estão escolhendo executar o sistema operacional
+ AIX no IBM Power Systems.
+ O AIX explora décadas de inovação tecnológica da IBM e é projetado para
+ fornecer o mais alto nível de desempenho, segurança e confiabilidade de
+ qualquer sistema operacional UNIX.
+\end_layout
+
+\begin_layout Standard
+1.2.2-Características
+\end_layout
+
+\begin_layout Standard
+O Advanced Interactive Executive, conhecido como AIX possui um foco mais
+ para aplicações de médio porte de código fechado que foi baseado no UNIX
+ System V.
+\end_layout
+
+\begin_layout Standard
+Foi desenvolvido em 1986 pela própria IBM e veio evoluindo desde então.
+ Em 2003, um grupo de empresas chamado SCO acusou a IBM de apropriamento
+ indevido do código do UNIX System V para incorporar ao código da versão
+ 4 do AIX.
+\end_layout
+
+\begin_layout Standard
+Como padrão, o AIX utilizou o Common Desktop Environment(CDE) como GUI,
+ devido a sua “familiaridade” com o Linux, mas também é possível hoje em
+ dia utilizar AIX com KDE ou GNOME.
+\end_layout
+
+\begin_layout Standard
+O AIX usa como console de Gerenciamento do Sistema o SMIT, que é uma espécie
+ de caixa de ferramentas para a interface e gerenciamento do sistema AIX.
+ Ela permite a um usuário navegar por um menu hierárquico de comandos, com
+ complexos comandos de linha chamados por uma palavra chave.
+ Ela é executada digitando o comando smit.
+ Administradores de sistema experientes fazem uso do acelerador F6 gerando
+ o comando de linha do SMIT a ser executado.
+ O SMIT também gera um log (lista) dos comandos que foram executados (smit.log),
+ que podem ser condensados em um script para automatizar uma série tarefas
+ rotineiras em um ambiente de inúmeros equipamentos (smit.script).
+\end_layout
+
+\begin_layout Standard
+Os comandos smit e smitty referem-se ao mesmo programa, embora smitty apresente
+ a versão em formato de texto (ASCII), enquanto smit apresenta uma interface
+ para o X Window se for possível; entretanto, se smit determina que X Window
+ não esta residente na memória, ele automaticamente apresentara a versão
+ em texto já citada.
+ Para se verificar se o X Window está residente utilize o comando DISPLAY.
+\end_layout
+
+\begin_layout Standard
+1.2.3-Aplicações
+\end_layout
+
+\begin_layout Standard
+O AIX é desenvolvido para computadores com arquitetura PowerPC, sendo limitado
+ a tecnologias pertencentes a IBM.
+ Por isso, chegou a ser utilizado em mainframes da IBM e da Apple quando
+ eles utilizam arquitetura PowerPC, tem a sua estabilidade, mas nunca se
+ estabeleceu no mercado tão bem quanto o QNX, FreeRTOS e o VxWorks, devido
+ a sua pouca compatibilidade com outras arquiteturas.
+ 
+\end_layout
+
+\begin_layout Standard
+1.3- FreeRTOS 
+\end_layout
+
+\begin_layout Standard
+1.3.1-Introdução
+\end_layout
+
+\begin_layout Standard
+O FreeRTOS é um Sistema Operacional de Tempo Real(RTOS) bastante popular,
+ com o seu kernel sendo especializado em Sistemas Embarcados, nele existem
+ 35 microcontroladores.
+ O FreeRTOS é distribuído sob a GPL(General Public License) sob algumas
+ exceções e restrições opcionais, essas exceções permitem que usuários mantenha
+ o sistema como open-source mesmo sendo o kernel restrito a alterações de
+ somente alguns usuários.
+ 
+\end_layout
+
+\begin_layout Standard
+1.3.2-Características 
+\end_layout
+
+\begin_layout Standard
+O FreeRTOS foi projetado para ser pequeno e simples.
+ O kernel consiste em alguns poucos arquivos codificados na linguagem C.
+ Para fazê-lo com legibilidade, redigibilidade e sustentabilidade a maior
+ parte do projeto é feita em C, mas existem algumas funções em Assembly
+ inclusas que são necessárias.
+\end_layout
+
+\begin_layout Standard
+Ele também fornece métodos para múltiplas threads ou processos, mutex, semáforos
+ e clocks, especificamente para aplicações com menor poder de software e
+ de hardware.
+ Existe também organizadores de prioridade de processos.
+ Para alocação de memória, existem quatro estratégias conhecidas para isso:
+\end_layout
+
+\begin_layout Standard
+•Somente alocar;
+\end_layout
+
+\begin_layout Standard
+•Alocar com um simples e rápido algoritmo; 
+\end_layout
+
+\begin_layout Standard
+•Um algoritmo mais complexo, mas ainda rápido método que usa coalescência
+ de memória;
+\end_layout
+
+\begin_layout Standard
+•Um algoritmo de alguma biblioteca do C que usa exclusão mútua de processos
+ como uma forma de proteção;
+\end_layout
+
+\begin_layout Standard
+Não existem características mais avançadas que existem em Sistemas Operacionais
+ maiores como Linux.
+ O foco do FreeRTOS é principalmente na compatibilidade e na velocidade
+ de execução, por isso pode-se dizer que o FreeRTOS pode ser considerado
+ mais uma biblioteca de processos ao em vez de um sistema operacional.
+\end_layout
+
+\begin_layout Standard
+O FreeRTOS também implementa multithreads fazendo chamadas de processos
+ regularmente em pequenos intervalos de tempo podendo trocar o processo
+ dependendo da sua prioridade.
+ Esses curtos intervalos são controlados por um clock de hardware que se
+ necessário podem fazer as devidas interrupções.
+\end_layout
+
+\begin_layout Standard
+1.3.3-Conclusão
+\end_layout
+
+\begin_layout Standard
+O FreeRTOS é um sistema operacional de tempo real muito utilizado que possui
+ uma execução muito rápida, um escalonamento configurável podendo ser preemptivo
+ ou colaborativo, diversas opções para aplicações pequenas, uma alta compatibili
+dade com a maioria das arquiteturas usadas e também possui um alto poder
+ comercial em diversas aplicações embarcadas, tendo até aplicações que estão
+ em órbita no espaço.
+ 
+\end_layout
+
+\begin_layout Standard
+1.4- Outros exemplos
+\end_layout
+
+\begin_layout Standard
+Existe uma quantidade muito grande de sistemas operacionais de tempo real
+ que são implementados para uma demanda mais generalista ou para demandas
+ mais específicas, como por exemplo o SafeRTOS que é um RTOS baseado no
+ FreeRTOS só que com um foco em segurança de tempo real, outro RTOS baseado
+ no FreeRTOS é o OpenRTOS que basicamente é uma cópia sem as exigências
+ do GPL e também o BRTOS que é um RTOS considerado básico.
+\end_layout
+
+\begin_layout Standard
+Outro RTOS líder de mercado é o VxWorks, que foi criado pela empresa WindRiver,
+ também especializado em sistemas embarcados estabelecendo uma estratégia
+ de interconexão chamada de conexão alvo-hospedeiro, que ajuda no gerenciamento
+ de uma ou mais aplicações embarcadas.
+ 
 \end_layout
 
 \end_body
