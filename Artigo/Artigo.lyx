@@ -32,7 +32,7 @@
 \index_command default
 \float_placement tbh
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref true
 \pdf_title "Your Title"
 \pdf_author "Your Name"
