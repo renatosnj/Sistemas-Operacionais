@@ -359,6 +359,12 @@ filename "Arquivos.lyx"
 
 \end_inset
 
+\begin_inset CommandInset include
+LatexCommand input
+filename "Principais.lyx"
+
+\end_inset
+
 
 \end_layout
 
@@ -381,7 +387,7 @@ phy entries embedded in the LaTeX-file.
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "Bibliografia"
+bibfiles "bibliografia"
 options "IEEEtran"
 
 \end_inset

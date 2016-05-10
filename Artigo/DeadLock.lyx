@@ -342,124 +342,118 @@ O algoritmo para essa detecção trabalha com duas variáveis, três matrizes
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
+\begin_layout Standard
 Estruturas: 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-n: Variável inteira.
+\begin_layout Standard
+•n: Variável inteira.
  Representa a Quantidade de Processos Ativos; 
 \end_layout
 
-\begin_layout Itemize
-m: Variável inteira.
+\begin_layout Standard
+•m: Variável inteira.
  Representa a Quantidade de Tipos de Recursos; 
 \end_layout
 
-\begin_layout Itemize
-Matriz E = : Matriz unidimensional, de tamanho m.
+\begin_layout Standard
+•Matriz E = : Matriz unidimensional, de tamanho m.
  Representa a Matriz de Recursos Existentes; 
 \end_layout
 
-\begin_layout Itemize
-Matriz A = : Matriz unidimensional, de tamanho m.
+\begin_layout Standard
+•Matriz A = : Matriz unidimensional, de tamanho m.
  Representa a Matriz de Recursos Atualmente Disponíveis; 
 \end_layout
 
-\begin_layout Itemize
-Matriz W = : Matriz unidimensional, de tamanho m.
+\begin_layout Standard
+•Matriz W = : Matriz unidimensional, de tamanho m.
  Representa uma Matriz Auxiliar, presente somente para facilitar o cálculo
  durante a execução do algoritmo; 
 \end_layout
 
-\begin_layout Itemize
-Matriz C = : Matriz bidimensional, de tamanho n x m.
+\begin_layout Standard
+•Matriz C = : Matriz bidimensional, de tamanho n x m.
  Representa a Matriz de Alocação Corrente; 
 \end_layout
 
-\begin_layout Itemize
-Matriz R = : Matriz bidimensional, de tamanho n x m.
+\begin_layout Standard
+•Matriz R = : Matriz bidimensional, de tamanho n x m.
  Representa a Matriz de Recursos Requisitados.
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
+\begin_layout Standard
 Faça (para preenchimento das estruturas): 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Preencher a Matriz E com as quantidade de instâncias de cada tipo de recurso;
+\begin_layout Standard
+•Preencher a Matriz E com as quantidade de instâncias de cada tipo de recurso;
  
 \end_layout
 
-\begin_layout Itemize
-Preencher a Matriz C com as quantidade de instâncias de cada tipo alocadas
+\begin_layout Standard
+•Preencher a Matriz C com as quantidade de instâncias de cada tipo alocadas
  aos processos, sendo que o somatório de cada coluna da Matriz C deve ser
  menor ou igual à quantidade do recurso correspondente na Matriz E (os processos
  nunca podem requisitar mais recursos que existentes no sistema); 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 Preencher a Matriz W com o resultado da subtração da quantidade de cada
  recurso da Matriz E com o valor do somatório de cada coluna do recurso
  correspondente da Matriz C, ou seja:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 \begin_inset Formula $wj=ej-\sum cij$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Itemize
-Preencher inicialmente a Matriz A com os valores da Matriz W.
+\begin_layout Standard
+•Preencher inicialmente a Matriz A com os valores da Matriz W.
  
 \end_layout
 
-\begin_layout Itemize
-Note que: 
+\begin_layout Standard
+•Note que: 
 \begin_inset Formula $aj=ej+wj$
 \end_inset
 
  ; 
 \end_layout
 
-\begin_layout Itemize
-Preencher a Matriz R com as próximas requisições dos processos, seguindo
+\begin_layout Standard
+•Preencher a Matriz R com as próximas requisições dos processos, seguindo
  as mesmas regras da Matriz C.
  
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
+\begin_layout Standard
 Faça (para detecção do deadlock): 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Inicialmente, desmarcar todos os processos; 
+\begin_layout Standard
+•Inicialmente, desmarcar todos os processos; 
 \end_layout
 
-\begin_layout Itemize
-Para um processo Pi desmarcado, verificar se todos os elementos da linha
+\begin_layout Standard
+•Para um processo Pi desmarcado, verificar se todos os elementos da linha
  i na Matriz R são menores ou iguais aos da Matriz A; 
 \end_layout
 
-\begin_layout Itemize
-Se for, então marque o execute o processo Pi e libere os recursos requisitados
+\begin_layout Standard
+•Se for, então marque o execute o processo Pi e libere os recursos requisitados
  pelo processo na Matriz C (adicionar a linha i da Matriz C na Matriz A);
  
 \end_layout
 
-\begin_layout Itemize
-Retornar ao passo 2.
+\begin_layout Standard
+•Retornar ao passo 2.
  
 \end_layout
 
-\end_deeper
 \end_deeper
 \begin_layout Itemize
 A lógica do algoritmo é a seguinte: cada processo é considerado como apto
@@ -518,64 +512,52 @@ Métodos de Recuperação
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Preempção
+\begin_layout Standard
+•Preempção
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Retira o recurso de algum outro processo, entrega a outro processo, depois
- devolve ao processo que cedeu o recurso, sem que o mesmo perceba
+\begin_layout Standard
+*Retira o recurso de algum outro processo, entrega a outro processo, depois
+ devolve ao processo que cedeu o recurso, sem que o mesmo perceba;
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Depende da natureza do recurso 
+\begin_layout Standard
+*Depende da natureza do recurso 
 \end_layout
 
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-Reversão de Estado 
+\begin_layout Standard
+•Reversão de Estado 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Armazena periodicamente o estado do processo (checkpointing)
+\begin_layout Standard
+*Armazena periodicamente o estado do processo (checkpointing)
 \end_layout
 
-\begin_layout Itemize
-Reinicia um processo do estado salvo (chekpoint) em caso de deadlock
+\begin_layout Standard
+*Reinicia um processo do estado salvo (chekpoint) em caso de deadlock
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Tudo que foi depois do chekpoint é perdido e precisa ser refeito 
+\begin_layout Standard
+*Tudo que foi depois do chekpoint é perdido e precisa ser refeito 
 \end_layout
 
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-Eliminação de processos
+\begin_layout Standard
+•Eliminação de processos
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Escolhe um processo para ser eliminado, quebrando o ciclo
+\begin_layout Standard
+*Escolhe um processo para ser eliminado, quebrando o ciclo;
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-O processo escolhido deve deter recursos que estão causando o deadlock
+\begin_layout Standard
+*O processo escolhido deve deter recursos que estão causando o deadlock
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Preferencialmente se escolhe um processo que possa ser reiniciado sem grandes
+\begin_layout Standard
+*Preferencialmente se escolhe um processo que possa ser reiniciado sem grandes
  consequências 
 \end_layout
 
-\end_deeper
 \end_deeper
 \end_deeper
 \begin_layout Itemize
