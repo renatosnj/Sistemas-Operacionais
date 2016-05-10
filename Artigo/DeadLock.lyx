@@ -156,8 +156,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename grafo.png
+	filename imagens/grafo.png
+	width 4cm
 
 \end_inset
 
@@ -294,7 +296,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ciclo.png
+	filename imagens/ciclo.png
 
 \end_inset
 
@@ -480,7 +482,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename matriz.png
+	filename imagens/matriz.png
 
 \end_inset
 
@@ -606,7 +608,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename banqueiro.png
+	filename imagens/banqueiro.png
 
 \end_inset
 
