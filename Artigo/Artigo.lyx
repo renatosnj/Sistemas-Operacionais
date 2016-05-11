@@ -229,14 +229,6 @@ required
 
 \end_layout
 
-\begin_layout Abstract
-Alguémvai ter que fazzer o resumo porque já fiz a estruturação do artigo.
-\end_layout
-
-\begin_layout Keywords
-simplicity, beauty, elegance
-\end_layout
-
 \begin_layout Standard in Title
 \begin_inset ERT
 status collapsed
@@ -358,6 +350,7 @@ LatexCommand input
 filename "Arquivos.lyx"
 
 \end_inset
+
 
 \begin_inset CommandInset include
 LatexCommand input

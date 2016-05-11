@@ -3,9 +3,12 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+\usepackage{titlesec}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language brazilian
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -25,6 +28,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -55,7 +59,7 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\quotes_language swedish
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -73,35 +77,317 @@ Processos e threads
 \end_layout
 
 \begin_layout Standard
+Sabe-se que Processos e Threads são componentes fundamentais de qualquer
+ sistema operacional.
+ Nesta seção descreveremos como processos são tratados em um Sistema Operacional
+ de Tempo Real (SOTR).
+ Na literarura de SOTR processos são chamados também de 
+\shape italic
+tarefas
+\shape default
+, não há nenhuma diferença entre os dois termos.
+ Neste trabalho estaremos se utilizando de ambos para se referir ao que
+ pode ser definido como, uma programa em execução junto com suas informações
+ de CPU (definição simples de processo/tarefa).
+ 
+\end_layout
+
+\begin_layout Subsection
+Funcionamento dos Processos e 
+\lang english
+Threads
+\lang brazilian
+ 
+\end_layout
+
+\begin_layout Standard
+Processos e Threads funcionam basicamente da mesma forma que nos outros
+ SO's.
+ A definição de Thread se mantém (um processo leve).
+ SOTR se utilizam de Threads como uma estratégia de otimização, pois a troca
+ de contexto de um Thread é mais rápida que a troca de contexto de um processo.
+ Isso se dá porque o Thread tem, em sua grande maioria, as mesmas informações
+ de CPU que seu processo pai.
+ Utilizar Threads também ajuda a cumprir as tarefas no prazo determinado.
+ 
+\end_layout
+
+\begin_layout Standard
+A seguir definiremos dois conceitos importantes do modelo de tarefas dos
+ SOTR, Restrições temporais e Relações de Precedência e Exclusão.
+\end_layout
+
+\begin_layout Subsubsection
+Restrições Temporais
+\end_layout
+
+\begin_layout Standard
+Além de corretude lógica, os SOTR devem apresentar corritude temporal (
+\shape italic
+timeliness
+\shape default
+)
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Jean-MarieFarines2000"
 
 \end_inset
 
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsection
-Funcionamento dos Processos e Threads 
+, a garantia de que uma tarefa é executada em um dado tempo e tem um tempo
+ limite para seu término.
+ Sendo assim, alguns conceitos adicionais são necessários como prazo máximo
+ de término de uma tarefa (
+\shape italic
+deadline
+\shape default
+) , tempo de computação, dependência de outras tarefas.
+ A seguir iremos introduzir alguns conceitos necessarios para entender o
+ funcionamento dos processos e o escalonamento em SOTR.
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Não atender ao deadline de uma tarefa pode gerar consequências custosas
+ para um sistema, não só para o SOTR, mas também para o contexto que ele
+ é aplicado.
+ Quanto a estas consequências classificamos dois tipos de tarefas:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tarefas Críticas (
+\shape italic
+hard
+\shape default
+):
+\series default
+ terminar depois d deadline pode causar alguma falha catastrófica.
+ Danos irreverssíveis a equipamentos ou perdas de vidas humanas.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tarefas Brandas / Não-Críticas (
+\shape italic
+soft
+\shape default
+):
+\series default
+ terminar depois do deadline impleca somente em perda de desempenho.
+ Sistemas multimídia, por exemplo.
+ 
+\end_layout
+
+\begin_layout Standard
+Outra característica é quanto a regularidade em que uma tarefa é ativada,
+ são admitidos dois tipos:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tarefas Periódicas (síncronas)
+\series default
+: a ativação do processamento de uma tarefa ocorre infinitamente, uma vez
+ em um espaço de tempo determinado.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tarefas Aperiódicas (assíncronas):
+\series default
+ a ativação do processamento de uma tarefa ocorre aleatoriamente em resposta
+ a um evento interno ou externo.
+\end_layout
+
+\begin_layout Standard
+Admitidos estes dois conceitos, existem três outros conceitos que surgem
+ com a aplicação deles ao conceito de deadline:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Deadline Hard:
+\series default
+ são tarefas críticas que tem uma periodicidade /regularidade bem definida.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Deadline Soft: 
+\series default
+são tarefas brandas que são aperiódicas, ou imprevisíveis.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tarefas Esporádicas:
+\series default
+ é um subconjunto de tarefas aperiódicas que tem a restrição de um intervalo
+ mínimo entre duas ativações.
+ Podem ser consideradas como deadline hard.
+ 
+\end_layout
+
+\begin_layout Standard
+Outras definições/nomenclaturas adicionais são:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tempo de Computação (Computation Time):
+\series default
+ tempo necessário para execução completa da tarefa.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tempo de Início (Start Time):
+\series default
+ tempo correspondente ao instante de início do processamento da tarefa em
+ uma tivação.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tempo de Término (Completion time):
+\series default
+ instante de tempo em que se completa a execução da tarefa.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tempo de Chegada (Arrival Time):
+\series default
+ instante em que o escalonador toma conhecimento de uma ativação desta tarefa.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Tempo de Liberação (Release Time):
+\series default
+ instante de inclusão na fila de Pronto 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Release Jitter:
+\series default
+ espera-se que sempre que uma tarefa chegue, ela seja liberada para o estado
+ de Pronto Nem sempre ocorre por causa de algumas razões: retardada pelo
+ pulling de um escakinador, pelo bloqueio de recepção de mensagens (em tarefas
+ ativadas por mensagens).
+ Pode ser definido como a variação máxima do tempo de liberação das isntâncias
+ de uma tarefa.
+\end_layout
+
+\begin_layout Subsubsection
+Relações de Precedência e de Exclusão
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Relações-de-Precedência"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Muitas vezes em aplicações de tempo real as tarefas não podem ser executadas
+ de forma harbitrária.
+ Elas dependem entre si de informações ou sinais para conseguirem realizar
+ sua execução.
+ As escalas
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+ordem de execução das tarefas
+\end_layout
+
+\end_inset
+
+ que os escalonadores produzem devem levar em conta esta codependência.
+ Normalmente estas relações são representadas por um grafo dirigido acíclico,
+ onde tarefas são os nós e os arcos representam as dependências.A utilzação
+ deste grafo auxilia na ordenação das tarefas liberadas evitando inverssões
+ de prioridades
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Quando uma tarefa mais prioritária é bloqueada por uma tarefa menos prioritária,
+ por causa de uma região crítica (RC)
+\end_layout
+
+\end_inset
+
+.
+ Em alguns momentos tarefas podem ser impeddas de executar por precisarem
+ de recursosque já estão sendo utilizados.
+ Para se resolver esta questão, utiliza-se prioridades.
+\end_layout
+
+\begin_layout Standard
+Existem duas técnicas de liberação de tarefas que sucedem a tarefa atual
+ em execução (tarefas sucessoras): 
+\end_layout
+
+\begin_layout Itemize
+por tempo (
+\shape italic
+offsets
+\shape default
+) [Aud93] : a tarefa sucessora será liberada após um tempo que garanta que
+ a tarefa anterior já terminou, este tempo é chamado de offset.
+ É calculado apartir do pior caso de execução da tarefa anterior, levando
+ em conta que ela seja interrompida por tarefas mais prioritárias.
+\end_layout
+
+\begin_layout Itemize
+por troca de mensagens (
+\shape italic
+jitters
+\shape default
+): a tarefa sucessora é liberada a partir do envio de uma mensagem da tarefa
+ anterior, passando recursos umas para as outras.
+ Esta liberação por mensagens introduz o conceito de Release Jitters, nas
+ liberações de tarefas sucessores.
+\end_layout
+
+\begin_layout Standard
+O pior caso sempre precisará ser calculado pelo escalonador.
+ A diferença entre as duas é que a troca de mensagens não disperdiça recursos
+ desnecessariamento como a offset.
+\end_layout
+
+\begin_layout Standard
+O conjuto de de tarefas que tem dependência estre si e se comunicam é encapsulad
+o no conceito de 
+\series bold
+Atividade
+\series default
+.
+ Existem dois tipos de atividades: sincronas (
+\shape italic
+loosely synchronous activity
+\shape default
+), são escalonadas através de troca de mensagens; assíncronas (
+\shape italic
+asynchronous activity
+\shape default
+), escalonadas através de troca de offsets.
 \end_layout
 
 \begin_layout Subsection
@@ -109,29 +395,82 @@ Estados e Transições de Processo e Threads
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsection
-Exclusão Mútua (algoritmos utilizados) 
+Basicamente os estados e transições de um processo de um SOTR são idênticos
+ a de um SO comum, somente algumas poucas diferenças.
+ Uma destas diferenças é o estadode inatividade, significa que um processo
+ periódico terminou sua computação e aguarda seu tempo de período para novamente
+ executá-la.
+ 
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+É importante dizer que estes estados são estados presentes na maioria dos
+ SOTR, dependendo de que tipo ou finalidade os estados podem alterar.
+ Isto está relacionado ao tipo de escalonador que um SOTR adota.
+ Por exemplo, um escalonador estático, que garante que uma tarefa sócomeça
+ a executar com todos os seus recursos, nunca passará para o estado de bloqueado.
+ Como não é escopo destetrabalho falar de um SOTR em específico, admitiremos
+ os estados da Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Estados-de-um-processo"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagens/estados-processos.png
+	width 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estados de um thread
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jean-MarieFarines2000"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Estados-de-um-processo"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -139,14 +478,75 @@ Escalonamento de Processos
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Coloque a definição de escalonador
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O escalonamento de processos é o ponto central na previsibilidade de um
+ SOTR.
+ Muitos algorimtos tem sido propostos, mas pouco contribuem para aplicações
+ reais.
+ Estaremos nos concentrando em técnicas para escalonamento dirigidos a prioridad
+es.
+ Isso se dá por cauxa da importância na literatura e cobertura de uma grande
+ parte dos SOTR.
+ Também, pela grande difusão desse tipo de sistema por organismos de padronizaçã
+o.
+ Alguns dos algoritmos são recomendados pela especificação POSIX
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jean-MarieFarines2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Assim como listamos definições adicionaisem em processos, precisaremos listar
+ algumasdefinições associadas a escalonadores de SOTR.
+ O calculo de uma escala pode ser de dois tipos: 
+\shape italic
+estático
+\shape default
+, combase nos atributos da tarefa; 
+\shape italic
+dinâmico
+\shape default
+, com base em atributos que mudam de acordo com a execução e evolução do
+ sistema.
+ Uma escala pode ser produzida em tempo de projeto do sistema (
+\shape italic
+escala off-line
+\shape default
+), ou em tempo de execução do sistema (
+\shape italic
+escala on-line
+\shape default
+).
+\end_layout
+
+\begin_layout Standard
+Quanto ao problema algoritmico de exalocamento de processos de tempo real.
+ Existirem soluções polinomiais para problemas específicos (usando simpleficaçõe
+s no modelo de tarefas ou na arquitetura).
+ Heurísticas podem tratar a complexidade, além de não serem ótimas, atendem
+ as restrições de alguns problemas.
+ Entretanto, o escalonamento de tempo real é um problema intratável (NP-Completo
+).
+ Admitindo este contexto, um algoritmo é ótimo quando quando minimiza algum
+ custo ou métrica.
+ Existem também os casos onde nenhumamétrica é definida, nestes casos, o
+ algoritmo ótimo é o que encontra uma escala realizável.
 \end_layout
 
 \begin_layout Subsubsection
@@ -154,44 +554,465 @@ Objetivos
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Um dos principais objetivos do escalonador de tempo real é ordenar as tarefas
+ na fila de processos que tem estado pronto.
+ Algumas politicas de escalonamento definen regras para esta ordenação.
+ Caso um escalonador satisfaça estas regras (se forem realizáveis) conseguirá
+ garantir as restrições temporais.
+ Uma escala ótima é a que melhor atende as restrições temporais.
 \end_layout
 
 \begin_layout Subsubsection
-Tipos de Escalonamento 
+Abordagens de Escalonamento 
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Um conceito importante para os algoritmos de escalonamento é a Carga Computacion
+al (
+\shape italic
+task load
+\shape default
+), que é definido como o somatório dos tempos de execução das tarefas na
+ fila de Pronto.
+ Existem dois tipos de carga: 
+\end_layout
+
+\begin_layout Itemize
+Carga Estática/Limitada: quando os tempos de chegada (
+\shape italic
+arrival times
+\shape default
+) são bem conhecidos.
+ Estas, normalmente são modeladas através de tarefas periódicas e/ou esporádicas
+ 
+\end_layout
+
+\begin_layout Itemize
+Carga Dinâmica/Ilimitadas: quando não se tem conhecimento dos tempos de
+ chegada.
+ Normalmente são modeladas usando tarefas aperiódicas.
+\end_layout
+
+\begin_layout Standard
+O processo de escalonamento é dividido em duas etapas: no Teste de Escalonamento
+, onde se verifica se aquele conjunto de tarefas satisfaz as restrições
+ temporais e se os critérios de ordenação do algoritmos são satisfeitos;
+ no Cálculo da Escala de Execução, satisfeitas as condições, é gerada a
+ escalade execução das tarefas.
+ Existem três abordagens de escalonamento de tempo real, elas serão descritas
+ a seguir.
+ 
+\end_layout
+
+\begin_layout Paragraph
+
+\emph on
+Com Garantia Em Tempo De Projeto (Off-line Guarantee)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tem como finalidade a previsibilidade determinista.
+ O sistema tem uma reserva de recursos suficiente para a execução das tarefas,
+ atendendo suas retrições.
+ Mesmo no pior caso a carga computacional é conhecida em tempo de projeto
+ (carga estática).
+ Por conhecer o tempo de chegada das tarefas, ele consegue fazer testes
+ de escalabilidade, checando se o conjunto de tarefas é escalonável e garantindo
+ suas retriçõestemporais.
+ Por conhecer as situações de pico, ele pode adaptar o sistema de maneira
+ que consiga garantir as restrições.
+ É apropriado para aplicações determinísticas ou críticas onde a carga é
+ conhecida (aplicações embarcadas, controle de tráfego ferroviário, controle
+ de processos em geral).
+ Tem as seguintes abordagens: 
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Executivo Cíclico
+\shape default
+ - o escalonador se resume a um simples despachante ativando tarefas segundo
+ a grade, ciclicamente.
+ Isso porque o pior caso já foi calculado.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Escalonamentos Dirigidos a Prioridades
+\shape default
+ - são mais flexíveis, o teste de escalonamento é realizado em tempo de
+ projeto.
+ A escala é produzida on-line por um escalonador dirigido a prioridades.
+ O escalonador pode ser: estático, baseado em atributos predefinidos; ou
+ dinâmico, prioridades variáveis.
+ O pior caso é definido a partir do teste de escalonabilidade é mais flexível
+ por não exigir uma reserva de recursos em tempo de execução.
+\end_layout
+
+\begin_layout Standard
+Em ambos o teste de escalonabilidade e a produção da escala são feitos em
+ tempo de projeto é de tamanho finito e determina a ocupação do processador
+ em tempo de execução.
+\end_layout
+
+\begin_layout Paragraph
+
+\emph on
+Com Garantia Em Tempo De Execução (On-line Guarantee)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se utilizam de um teste de verificação de escalonamento, esse teste é baseado
+ no conjunto formado por uma nova tarefa que chega e as exitentes na fila
+ de pronto.
+ São chamados de testes de aceitação, baseados em análises de hipóteses
+ do pior caso.
+ Se o teste indica o conjunto como não escalonável, a nova tarefa é descartada.
+ É aplicável a sistemas que possuem restrições críticas, mas operam em ambientes
+ não determinísticos (sistemas militares, sistemas de radar e controle aéreo,
+ dentre outros).
+ Uma de suas deficiências é a possibilidade de descartar tarefas desnecessariame
+nte.
+\end_layout
+
+\begin_layout Paragraph
+
+\emph on
+Melhor Esforço (Best-effort) 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tentam encontrar escala realizável em tempo de execução sem testes, ou com
+ testes mais fracos.
+ Não exite garantia do atendimento às restrições temporais.
+ Normalmente são aplicados a sistemas não críticos "soft", a perda de deadlines
+ não representa custos além da diminuição do desempenho (sistemas multimídia).
+ Esta abordagem é melhor do que a on-line guarantee em casos médios.
+ Algumas técnicas que sãoutilizadas para tratar sobrecarga são: Computação
+ imprecisa, Deadline (m,k) Firm e Tarefas com duplo Deadlines.
+\end_layout
+
+\begin_layout Subsubsection
+Testes de Escalonamento
+\end_layout
+
+\begin_layout Standard
+Variam conforme o modelo de tarefas e as políticas definidas em um problema
+ de escalonamento.
+ Normalmente correspondem a análise de pior caso, são de complexidade NP.
+ Existem três tipos:
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Teste Exato
+\shape default
+ - em muitos problemas são impraticáveis.
+ São precisos quando encontram conjuntos não escalonáveis.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Teste suficiente
+\shape default
+ - são mais simples, mas apresentam custo de descarte de tarefas escalonáveis.
+ É um conjunto de testes mais restritivos, caso aceitos, certamente são
+ escalonáveis.
+ Entre os descartos, podem existir conjuntos escalonáveis.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Teste Necessário
+\shape default
+ - análises simples, mas não tão restritivas.
+ Ser aceito no teste não implica em ser escalável.
+ Garantia de que os que são descatados não são escalonáveis.
 \end_layout
 
 \begin_layout Subsubsection
 Algoritmos de Escalonamento
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Algoritmos-de-Escalonamento"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Existem dois tipos de algoritmos de prioridade para SOTR, os de prioridade
+ fixa (baseiam a prioridade em atributos predefinidos) e os de prioridade
+ dinâmica (baseam a prioridade em atributos que são gerados de acordo com
+ a execuçãod o sistema).
+ Apresentaremos os de prioridade fixa, que são mais aplicados em sistemas
+ comuns.
+ Uma fonte para os algoritmos de prioridade dinâmica pode ser encontrada
+ no Anexo A do livro Sistemas de Tempo Real
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jean-MarieFarines2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+Taxa Monotônica (Rate Monotonic) 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Produz escalas em tempo de execução através de escalonadores peemptivos
+ dirigidos a prioridade.
+ é um algoritmo ótimo entre os escalonadores de prioridade fixa.
+ Seu modelo de tarefas admite as seguintes premissas:
+\end_layout
+
+\begin_layout Itemize
+tarefas periódicas e independentes 
+\end_layout
+
+\begin_layout Itemize
+Deadline coicide com seu período 
+\end_layout
+
+\begin_layout Itemize
+Tempo de computação conhecido e constante 
+\end_layout
+
+\begin_layout Itemize
+o tempo de chaveamento de tarefas é admitidos como nulo 
+\end_layout
+
+\begin_layout Standard
+Sua principal característica é, quanto mais frequente uma tarefa, mais prioritár
+ia ela será.
+ A análise de escalonamento é feita em tempo de projeto.
+ As dificuldades deste algorimo são quando o deadline coicide com o período.
+ Muito restritiva, modelos práticos não satisfazem estes requisitos.
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+Earliest Deadline First Escala
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A escala é produzida em tempo de execução.
+ O escalonador é preemptivo, dirigido a prioridades, online e dinâmico.
+ É um algoritmo de escalnamento considerado ótimo dentre os escalonadores
+ de prioridade dinâmica.
+ Admite as mesmas premissas do modelo de tarefas do Taxa Monotônica.
+\end_layout
+
+\begin_layout Standard
+Poítica prioridades atribuidas dinâmicamente.
+ A ordenação da escala é feita com base nos deadlines das tarefa.
+ As mais prioritárias são as mais próximas do tempo atual.
+ A cada chegada a fila de pronto é reordenada.
+ Quando uma tarefa é ativada, um novo valor de deadline (d) é atribuído,
+ com base no número de períodos anteriores (k) [d = k*P].
+ Análise de Escalonabilidade verificada em tempo de projeto.
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+"Deadline Monotônico" (Deadline Monotonic) 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+É uma extenção do modelo de tarefas do Algoritmo da Taxa Monotônica.
+ Define tarefas periódicas independentes.
+ Assume deadlines relativos, menores ou inguais aos períodos.
+ Sua política consiste em definir atribuições estáticas de prioridades,
+ baseada nos deadlianes (que são relativos); prioridades são atribuídas
+ na ordem inversa dos valores de deadlines; a escala é feita em tempo de
+ execução, com um escalonador preemptivo e dirigido a prioridades, sendo
+ um escalonador estático e online.
+\end_layout
+
+\begin_layout Subsection
+Exclusão Mútua (algoritmos utilizados) 
+\end_layout
+
+\begin_layout Standard
+Como mostrado na seção 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Relações-de-Precedência"
+
+\end_inset
+
+, multiplos threads fazem arte de SOTR.
+ Esta comunicação entre tarefas pode se dar através de semaforos ou monitores.
+ Tarefas menos prioritárias podem bloquear tarefas mais prioritárias por
+ causa do compartilhamento de recursos, isso é chamado de 
+\shape italic
+Inversão de Prioridade
+\shape default
+.
+ Quando as tarefas são dependentes, a inversão de prioridades é inevitável.
+ Os métodos buscam limitar estas ocorrências, impondo regras de maneira
+ que o pior caso de bloqueio no acesso a uma variável possa ser sempre conhecido.
+ 
+\end_layout
+
+\begin_layout Standard
+Uma solução seria desabilitar a preempção quando a tarefa entrar na região
+ crítica.
+ Entretanto, fazer isso é bastante penalizante para tarefas mais prioritárias
+ que não usam recurso em questão.
+ A seguier são descritas três técnicas para garantir exclusão mútua.
+ Todos são algoritmos de prioridade estática, como descrito na seção 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Algoritmos-de-Escalonamento"
+
+\end_inset
+
+, não descreveremos algoritmos de prioridade dinâmica.
+ 
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+Protocolo Herança de Prioridade 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Este algoritmo consistem em redefinir o conceito de prioridade, ela deixa
+ de ser estática, a tarefa que estiver com o recurso é a que tem maior prioridad
+e.
+ Asmitindo assim, dois tipos de prioridade: 
+\shape italic
+Estática
+\shape default
+, atribuida por uma política de prioridade fixa (pelos algoritmos de escalonamen
+to); 
+\shape italic
+Dinâmica
+\shape default
+, que é derivada das ações de bloqueio no sistema.
+ 
+\end_layout
+
+\begin_layout Standard
+Se uma tarefa T é bloqueada por outra estar na RC, sua prioridade (estática
+ ou dinâmica) é passada para a outra tarefa que está na RC.
+ Quando esta tarefa termina, sua prioridade volta para a que era anteriormente,
+ ou assume a mais alta das prioridades que ela bloqueou.
+ Neste caso, existem dois tipos de bloqueio: 
+\shape italic
+Direto, 
+\shape default
+tarefa mais prioritária tenta acessar região que está sendo usada por uma
+ tarefa menos prioritária; 
+\shape italic
+Por Herança.
+ 
+\shape default
+quando uma tarefa de prioridade mediana é impedida de executar por causa
+ que uma tarefa que herdou a prioridade de uma maior está com o recurso.
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+Protocolo de Prioridade Teto (“Priority Ceiling Protocol”)
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tem como principal objetivo evitar inversões de prioridades e deadlocks.
+ É uma extenção do 
+\shape italic
+Protocolo Herança de Prioridade
+\shape default
+.
+ Adiciona uma nova regra de controle aos pedidos de entrada na RC.
+ Todas as RC's tem um valor de prioridade teto (
+\shape italic
+ceiling
+\shape default
+), que consiste na prioridade da tarefa mais prioritária que acessa a RC.
+ As regras que definem a entrada ou não em uma RC são: (1) se a prioridade
+ ativa da tarefa em questão for maior que a prioridade teto de uma região
+ já bloqueada; (2) uma tarefa ativa só pode ser bloqueada uma só vez por
+ tarefas menos prioritárias, por ativação; (3) uma tarefa fica bloqueada
+ quando sua prioridade dinâmica não é maior que a prioridade teto de um
+ recurso bloqueado.
+\end_layout
+
+\begin_layout Paragraph
+
+\shape italic
+"Immediate Priority Ceiling Protocol” (IPCP) 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tenta melhorar o desempenho do 
+\shape italic
+Protocolo de Prioridade Teto.
+
+\shape default
+ A herança de prioridade não acontece quando uma tarefa mais prioritária
+ e bloqueada.
+ A tarefa menos prioritária recebe a maior prioridade logo no início do
+ acesso a RC.
+ Uma tarefa só pode ser bloqueada no início de sua execução, por consequência,
+ quando uma tarefa começa a executar com todos os seus recursos ela só pode
+ sofreer interferências de tarefas com prioridade maior que ela.
+ É mais fácil de implementar e diminue a troca de contexto, em relação ao
+ PCP.
+ É recomendado pela specificação POSIX.
 \end_layout
 
 \end_body
