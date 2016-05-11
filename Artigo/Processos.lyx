@@ -617,7 +617,7 @@ Com Garantia Em Tempo De Projeto (Off-line Guarantee)
 \begin_layout Standard
 Tem como finalidade a previsibilidade determinista.
  O sistema tem uma reserva de recursos suficiente para a execução das tarefas,
- atendendo suas retrições.
+ atendendo suas restrições.
  Mesmo no pior caso a carga computacional é conhecida em tempo de projeto
  (carga estática).
  Por conhecer o tempo de chegada das tarefas, ele consegue fazer testes
@@ -799,7 +799,7 @@ tarefas periódicas e independentes
 \end_layout
 
 \begin_layout Itemize
-Deadline coicide com seu período 
+Deadline coincide com seu período 
 \end_layout
 
 \begin_layout Itemize
@@ -857,7 +857,7 @@ Poítica prioridades atribuidas dinâmicamente.
 \end_layout
 
 \begin_layout Standard
-É uma extenção do modelo de tarefas do Algoritmo da Taxa Monotônica.
+É uma extensão do modelo de tarefas do Algoritmo da Taxa Monotônica.
  Define tarefas periódicas independentes.
  Assume deadlines relativos, menores ou inguais aos períodos.
  Sua política consiste em definir atribuições estáticas de prioridades,
@@ -868,7 +868,7 @@ Poítica prioridades atribuidas dinâmicamente.
 \end_layout
 
 \begin_layout Subsection
-Exclusão Mútua (algoritmos utilizados) 
+Exclusão Mútua
 \end_layout
 
 \begin_layout Standard
@@ -924,7 +924,7 @@ Protocolo Herança de Prioridade
 Este algoritmo consistem em redefinir o conceito de prioridade, ela deixa
  de ser estática, a tarefa que estiver com o recurso é a que tem maior prioridad
 e.
- Asmitindo assim, dois tipos de prioridade: 
+ Asumitindo assim, dois tipos de prioridade: 
 \shape italic
 Estática
 \shape default
@@ -1009,7 +1009,7 @@ Protocolo de Prioridade Teto.
  acesso a RC.
  Uma tarefa só pode ser bloqueada no início de sua execução, por consequência,
  quando uma tarefa começa a executar com todos os seus recursos ela só pode
- sofreer interferências de tarefas com prioridade maior que ela.
+ sofrer interferências de tarefas com prioridade maior que ela.
  É mais fácil de implementar e diminue a troca de contexto, em relação ao
  PCP.
  É recomendado pela specificação POSIX.
