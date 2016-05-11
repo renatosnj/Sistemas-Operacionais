@@ -677,14 +677,22 @@ Gerência de Memória
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Sistemas operacionais em tempo real, utilizam diversas estratégias de alocação
+ de memória e algortimos que são usados de forma que melhorem a peformace
+ do sistema
+\end_layout
+
+\begin_layout Standard
+Basicamente existem dois tipos de alocação de memória.
+ 
+\end_layout
+
+\begin_layout Itemize
+Stack (Pilha)
+\end_layout
+
+\begin_layout Itemize
+Heap(Monte)
 \end_layout
 
 \begin_layout Subsection
