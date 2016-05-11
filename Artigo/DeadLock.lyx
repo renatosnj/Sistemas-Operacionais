@@ -676,6 +676,10 @@ Atacando a condição de espera circular: Um meio simples de eliminar é ter
 Gerência de Memória 
 \end_layout
 
+\begin_layout Subsection
+Necessidades Básicas da Gerência de Memória 
+\end_layout
+
 \begin_layout Standard
 Sistemas operacionais em tempo real, utilizam diversas estratégias de alocação
  de memória e algortimos que são usados de forma que melhorem a peformace
@@ -695,19 +699,37 @@ Stack (Pilha)
 Heap(Monte)
 \end_layout
 
-\begin_layout Subsection
-Necessidades Básicas da Gerência de Memória 
+\begin_layout Standard
+A cada dia que passa os programadores necessitam de mais memória e mais
+ programas rodando simultaneamente para poderem tratar cada vez mais informações.
+ O tratamento necessário da memória utilizada não é uma tarefa fácil de
+ ser implementada principalmente quando se trata de Sistemas Críticos.
+ Existem vários requisitos que devem ser observados para o correto funcionamento
+, tais como, segurança, isolamento, performance, entre outros.
+ Para isto a função de gerenciar a memória passa a ser do sistema operacional
+ e não mais do aplicativo.
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Para que uma memória funcione de maneira correta, é necessário que se tome
+ cuidado com vários elementos como segurança e isolamento, e para isso é
+ utilizado o gerenciamento de memória.
+ Este desenvolve sua função a partir de duas tarefas, a Alocação de Memória
+ e a Fragmentação:
+\end_layout
+
+\begin_layout Standard
+A Alocação pode ser tanto estática, feita quando o programa é compilado,
+ e a dinâmica, adiada até a execução.
+ A Fragmentação, desperdício de memória, por sua vez pode ser interna, sobra
+ na memória reservada ao programa, e externa que acontece quando após o
+ termino dos programas são deixadas pequenas lacunas entre as páginas.
+ Para que a utilização da memória seja mais vantajosa, é utilizada a Paginação,
+ processos virtuais da memória, aplicados na divisão da memória física em
+ partições menores, chamadas de frames.
+ O conjunto de registradores especiais rápidos chama-se Translation Lookaside
+ Buffer, estes são subdivididos em chave valor que lhe é dado em todos os
+ registradores ao mesmo tempo, e valor.
 \end_layout
 
 \begin_layout Subsection
@@ -715,14 +737,10 @@ Gerenciamento de Memória (Funcionamento)
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+O Gerenciamento de Memória em Sistemas Operacionais de tempo real utilizam
+ de multiprogramação em sua maioria para que possa executar mais de um processo
+ ao mesmo tempo, mas sem correr riscos porque execução rápida e baixa complexida
+de ainda é prioridade nos RTOS.
 \end_layout
 
 \begin_layout Subsection
@@ -730,14 +748,11 @@ Particionamento de Memória
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Como a maioria dos Sistemas Operacionais de Tempo Real utilizam multiprogramação
+, o particionamento da memória é feito a partir da prioridade do programa,
+ quanto mais importante for o processo, mais rápido ele terá seu alocamento
+ e se necessário os programas são desalocados para que processos de prioridade
+ maior sejam alocados.
 \end_layout
 
 \begin_layout Subsection
@@ -745,104 +760,26 @@ Memória Virtual
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Motivação para o surgimento das Técnicas de Memória Virtual 
-\end_layout
-
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Memória Virtual com Paginação 
+Memória virtual é quando memórias principais e secundárias juntas criam
+ a ilusão de que há muito mais memória, com isso os programas e suas estruturas
+ de dados não se limitam ao tamanho da memória física, e assumem endereços
+ na memória secundária.
+ O gerenciamento de memória virtual pode ocasionar vazamento de memória,
+ ou seja, quando determinada quantia de memória é alocada e não liberada
+ mesmo que não sendo utilizada, assim dados perdem a referencia sem ao menos
+ terem usado memória.
+ O gerenciamento automático chama-se Garbage collector.
+ Ele retira os blocos de memória automaticamente.
+ Seus algoritmos são divididos em duas famílias: a Identificação direta,
+ por contagem de referência, e a Identificação indireta, por varrimento.
 \end_layout
 
 \begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Paginação Multinível 
-\end_layout
-
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Algoritmos de substituição d páginas 
-\end_layout
-
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Memória Virtual com Segmentação 
-\end_layout
-
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
-\end_layout
-
-\begin_layout Subsubsection
-Segmentação Paginada
-\end_layout
-
-\begin_layout Standard
-Texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto texto texto texto texto texto texto texto
- texto texto texto texto texto .
+Esse tipo de estratégia raramente são utilizadas em Sistemas Operacionais
+ de Tempo Real, pois a maioria deles são aplicações embarcadas com poder
+ restrito de hardware, não tem sentido usar memória virtual se o poder da
+ memória já é projetado com o consciência de que é limitado, não tem sentido
+ fazê-la aumentar.
 \end_layout
 
 \end_body
